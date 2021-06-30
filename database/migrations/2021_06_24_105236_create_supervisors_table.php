@@ -15,6 +15,19 @@ class CreateSupervisorsTable extends Migration
     {
         Schema::create('supervisors', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('supervisor_id')->nullable();
+            $table->foreign('supervisor_id')->references('id')->on('all_users')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->unsignedBigInteger('designation_id')->nullable();
+            $table->foreign('designation_id')->references('id')->on('designations')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('department_id')->nullable();
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('university_id')->nullable();
+            $table->foreign('university_id')->references('id')->on('universities')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('slug')->nullable();
+            $table->string('is_active')->nullable();
             $table->timestamps();
         });
     }

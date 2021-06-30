@@ -15,6 +15,11 @@ class CreateAssignedStudentsTable extends Migration
     {
         Schema::create('assigned__students', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('project_id')->nullable();
+            $table->foreign('project_id')->references('id')->on('project_or__theses')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('student_id')->nullable();
+            $table->foreign('student_id')->references('id')->on('all_users')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('is_active')->nullable();
             $table->timestamps();
         });
     }

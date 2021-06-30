@@ -17,10 +17,11 @@ class CreateAllUsersTable extends Migration
             $table->id();
             $table->string('email')->nullable();
             $table->string('password')->nullable();
-             $table->unsignedBigInteger('role_id')->nullable();
+            $table->unsignedBigInteger('role_id')->nullable();
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
             $table->string('is_active')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('token')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
