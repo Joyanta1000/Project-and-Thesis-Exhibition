@@ -33,12 +33,6 @@
             <div class="pb-3">
               <h1>Data Tables</h1>
             </div>
-
-            <div class="row">
-              <div class="col">
-                <div class="alert alert-warning" role="alert">
-                  <strong>DataTables are a jQuery-only plugin</strong><br />
-                  If you know a similar vanilla JS library that you want to see supported, feel free to open an issue on GitHub.
 <div>
                   @if (session('status'))
 <div class="card-header">
@@ -54,6 +48,11 @@
 </div>
 @endif
 </div>
+            <div class="row">
+              <div class="col">
+                <div class="alert alert-warning" role="alert">
+                  <strong>DataTables are a jQuery-only plugin</strong><br />
+                  If you know a similar vanilla JS library that you want to see supported, feel free to open an issue on GitHub.
                 </div>
               </div>
             </div>
@@ -89,12 +88,14 @@
                           <td>{{ $type->name }}</td>
                           @if($type->is_active==1)
                           <td>
-                            <span class="badge badge-pill badge-primary">Active</span>
+                            <a class="badge badge-pill badge-primary"  href="{{URL::to('update_status/'.$type->id)}}">Active</a>
+                            <!-- <button >Active</button> -->
                           </td>
                           @endif
                           @if($type->is_active==0)
                           <td>
-                            <span class="badge badge-pill badge-danger">Inactive</span>
+                            <a class="badge badge-pill badge-danger" href="{{URL::to('update_status/'.$type->id)}}">Inactive</a>
+                            <!-- <button class="badge badge-pill badge-danger">Inactive</button> -->
                           </td>
                           @endif
                           <td>

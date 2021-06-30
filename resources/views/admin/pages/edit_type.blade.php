@@ -36,11 +36,11 @@
 
             <div class="row">
               <div class="col-lg-6">
-                <form action="/insert_type" method="POST">
+                <form action="/update_type/{{$types_info->id}}" method="POST">
                   <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
                 <div class="card mb-grid">
                   <div class="card-header">
-                    <div class="card-header-title">Add Types</div>
+                    <div class="card-header-title">Update Type</div>
                   </div>
 
 @if (session('status'))
@@ -71,7 +71,7 @@
                   <div class="card-body">
                     <div class="form-group">
                       <label class="form-label">Type</label>
-                      <input class="form-control mb-2" name="name" type="text" value="{{old('name')}}" placeholder="Add Type">
+                      <input class="form-control mb-2" name="name" type="text" value="{{ $types_info->name }}">
                     </div>
 
                     <!-- <div class="form-group">
@@ -90,7 +90,7 @@
                     </div> -->
                   </div>
                   <div class="card-footer">
-                    <button type="Submit" class="btn btn-sm btn-primary">Submit</button>
+                    <button type="Submit" class="btn btn-sm btn-primary">Update</button>
                     <!-- Cleave.js is a small library for input formatting. Check out their <a href="http://nosir.github.io/cleave.js/" target="_blank">documentation</a>. <strong>Nice to know:</strong> There are also Angular and ReactJS components available. -->
                   </div>
                 </div>

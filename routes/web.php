@@ -26,3 +26,11 @@ Route::get('/add_types', function () {
 Route::post('/insert_type',[TypeController::class, 'insert_type']);
 
 Route::get('/types',[TypeController::class, 'index']);
+
+Route::get('/update_status/{id}',[TypeController::class, 'update_status']);
+
+Route::get('/edit_type/{id}',[TypeController::class, 'edit_type']);
+
+Route::post('/update_type/{id}',[TypeController::class, 'update_type']);
+
+Route::get('/delete_types_information/{id}',[TypeController::class, 'delete_types_information']);

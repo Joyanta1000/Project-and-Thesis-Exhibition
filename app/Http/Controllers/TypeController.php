@@ -84,9 +84,34 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+
+    public function update_status($id)
     {
-        //
+        $type = Type::find($id);
+
+        if ($type->is_active == 1) {
+            $type->is_active = 0;
+            $type->save();
+            return redirect()->back()->with('status',"Type inactivated successfully");
+        }
+
+        else if ($type->is_active == 0) {
+            $type->is_active = 1;
+            $type->save();
+            return redirect()->back()->with('status',"Type activated successfully");
+        }
+
+        else
+        {
+            return redirect()->back()->with('status',"Operation failed");
+        }
+    }
+
+    public function edit_type($id)
+    {
+        $types_info = Type::find($id);
+
+        return view('admin.pages.edit_type',compact('types_info'));
     }
 
     /**
@@ -96,9 +121,31 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update_type(Request $request, $id)
     {
-        //
+        $rules = [
+            'name' => 'required|string|min:1|max:255|unique:types,name',
+            // 'city_name' => 'required|string|min:3|max:255',
+            // 'email' => 'required|string|email|max:255'
+        ];
+        $validator = Validator::make($request->all(),$rules);
+        if ($validator->fails()) {
+            return redirect()->back()
+            ->withInput()
+            ->withErrors($validator);
+        }
+        else{
+            $data = $request->input();
+            try{
+                $type = Type::find($id);
+                $type->name = $data['name'];
+                $type->save();
+                return redirect()->back()->with('status',"Types information updated successfully");
+            }
+            catch(Exception $e){
+                return redirect()->back()->with('failed',"operation failed");
+            }
+        }
     }
 
     /**
@@ -107,8 +154,14 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete_types_information($id)
     {
-        //
+            try{
+                Type::find($id)->delete();
+                return redirect()->back()->with('status',"Types information deleted successfully");
+            }
+            catch(Exception $e){
+                return redirect()->back()->with('failed',"operation failed");
+            }
     }
 }
