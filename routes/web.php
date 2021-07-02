@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\TypeController;
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,3 +35,19 @@ Route::get('/edit_type/{id}',[TypeController::class, 'edit_type']);
 Route::post('/update_type/{id}',[TypeController::class, 'update_type']);
 
 Route::get('/delete_types_information/{id}',[TypeController::class, 'delete_types_information']);
+
+Route::get('/add_category', function () {
+    return view('admin.pages.add_category');
+});
+
+Route::post('/insert_category',[CategoryController::class, 'insert_category']);
+
+Route::get('/categories',[CategoryController::class, 'index']);
+
+Route::get('/update_status_of_category/{id}',[CategoryController::class, 'update_status_of_category']);
+
+Route::get('/edit_category/{id}',[CategoryController::class, 'edit_category']);
+
+Route::post('/update_category/{id}',[CategoryController::class, 'update_category']);
+
+Route::get('/delete_categories_information/{id}',[CategoryController::class, 'delete_categories_information']);
