@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UniversityController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,3 +52,19 @@ Route::get('/edit_category/{id}',[CategoryController::class, 'edit_category']);
 Route::post('/update_category/{id}',[CategoryController::class, 'update_category']);
 
 Route::get('/delete_categories_information/{id}',[CategoryController::class, 'delete_categories_information']);
+
+Route::get('/add_university', function () {
+    return view('admin.pages.add_university');
+});
+
+Route::post('/insert_university',[UniversityController::class, 'insert_university']);
+
+Route::get('/universities',[UniversityController::class, 'index']);
+
+Route::get('/update_status_of_university/{id}',[UniversityController::class, 'update_status_of_university']);
+
+Route::get('/edit_university/{id}',[UniversityController::class, 'edit_university']);
+
+Route::post('/update_university/{id}',[UniversityController::class, 'update_university']);
+
+Route::get('/delete_universities_information/{id}',[UniversityController::class, 'delete_universities_information']);
