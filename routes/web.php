@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UniversityController;
+use App\Http\Controllers\DesignationController;
+use App\Http\Controllers\DepartmentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -68,3 +70,35 @@ Route::get('/edit_university/{id}',[UniversityController::class, 'edit_universit
 Route::post('/update_university/{id}',[UniversityController::class, 'update_university']);
 
 Route::get('/delete_universities_information/{id}',[UniversityController::class, 'delete_universities_information']);
+
+Route::get('/add_designation', function () {
+    return view('admin.pages.add_designation');
+});
+
+Route::post('/insert_designation',[DesignationController::class, 'insert_designation']);
+
+Route::get('/designations',[DesignationController::class, 'index']);
+
+Route::get('/update_status_of_designation/{id}',[DesignationController::class, 'update_status_of_designation']);
+
+Route::get('/edit_designations_info/{id}',[DesignationController::class, 'edit_designations_info']);
+
+Route::post('/update_designations_information/{id}',[DesignationController::class, 'update_designations_information']);
+
+Route::get('/delete_designations_information/{id}',[DesignationController::class, 'delete_designations_information']);
+
+Route::get('/add_department', function () {
+    return view('admin.pages.add_department');
+});
+
+Route::post('/insert_departments_information',[DepartmentController::class, 'insert_departments_information']);
+
+Route::get('/departments',[DepartmentController::class, 'index']);
+
+Route::get('/update_status_of_department/{id}',[DepartmentController::class, 'update_status_of_department']);
+
+Route::get('/edit_departments_info/{id}',[DepartmentController::class, 'edit_departments_info']);
+
+Route::post('/update_departments_information/{id}',[DepartmentController::class, 'update_departments_information']);
+
+Route::get('/delete_departments_information/{id}',[DepartmentController::class, 'delete_departments_information']);
