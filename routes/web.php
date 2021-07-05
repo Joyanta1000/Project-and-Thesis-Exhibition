@@ -8,6 +8,9 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\AchievementController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -102,3 +105,33 @@ Route::get('/edit_departments_info/{id}',[DepartmentController::class, 'edit_dep
 Route::post('/update_departments_information/{id}',[DepartmentController::class, 'update_departments_information']);
 
 Route::get('/delete_departments_information/{id}',[DepartmentController::class, 'delete_departments_information']);
+
+Route::get('/add_role', function () {
+    return view('admin.pages.add_role');
+});
+
+Route::post('/insert_role',[RoleController::class, 'insert_roles_information']);
+
+Route::get('/roles',[RoleController::class, 'index']);
+
+Route::get('/update_status_of_role/{id}',[RoleController::class, 'update_status_of_role']);
+
+Route::get('/edit_roles_info/{id}',[RoleController::class, 'edit_roles_info']);
+
+Route::post('/update_roles_information/{id}',[RoleController::class, 'update_roles_information']);
+
+Route::get('/delete_roles_information/{id}',[RoleController::class, 'delete_roles_information']);
+
+Route::get('/add_achievement', function () {
+    return view('admin.pages.add_achievement');
+});
+
+Route::post('/insert_achievement',[AchievementController::class, 'insert_achievements_information']);
+
+Route::get('/achievements',[AchievementController::class, 'index']);
+
+Route::get('/edit_achievements_info/{id}',[AchievementController::class, 'edit_achievements_info']);
+
+Route::post('/update_achievements_information/{id}',[AchievementController::class, 'update_achievements_information']);
+
+Route::get('/delete_achievements_information/{id}',[AchievementController::class, 'delete_achievements_information']);

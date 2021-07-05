@@ -25,6 +25,8 @@ class CreateStudentsTable extends Migration
             $table->string('roll')->nullable();
             $table->unsignedBigInteger('university_id')->nullable();
             $table->foreign('university_id')->references('id')->on('universities')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('department_id')->nullable();
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
