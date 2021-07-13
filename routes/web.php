@@ -10,6 +10,7 @@ use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AchievementController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -135,3 +136,13 @@ Route::get('/edit_achievements_info/{id}',[AchievementController::class, 'edit_a
 Route::post('/update_achievements_information/{id}',[AchievementController::class, 'update_achievements_information']);
 
 Route::get('/delete_achievements_information/{id}',[AchievementController::class, 'delete_achievements_information']);
+
+Route::get('authentication/student_register',[UserController::class, 'index']);
+
+Route::middleware(['student'])->group(function () {
+
+	Route::get('/student_dashboard', function () {
+    return view('student.student_dashboard');
+});
+    
+});
