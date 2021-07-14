@@ -137,7 +137,11 @@ Route::post('/update_achievements_information/{id}',[AchievementController::clas
 
 Route::get('/delete_achievements_information/{id}',[AchievementController::class, 'delete_achievements_information']);
 
-Route::get('authentication/student_register',[UserController::class, 'index']);
+Route::get('student_register',[UserController::class, 'index']);
+
+Route::post('/student_registration',[UserController::class, 'student_registration']);
+
+Route::get('/emailverify',[UserController::class, 'verify']);
 
 Route::middleware(['student'])->group(function () {
 

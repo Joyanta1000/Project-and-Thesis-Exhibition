@@ -36,8 +36,37 @@
           <div class="card-seperator">
             <span>or</span>
           </div>
+
+<div>
+  @if (session('status'))
+<br>
+<div class="alert alert-success" role="alert">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  {{ session('status') }}
+</div>
+@elseif(session('failed'))
+<br>
+<div class="alert alert-danger" role="alert">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  {{ session('failed') }}
+</div>
+@endif
+
+@if (count($errors) > 0)
+<br>
+         <div class = "alert alert-danger">
+            <ul>
+               @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+               @endforeach
+            </ul>
+         </div>
+@endif
+</div>
+
           <div class="card-body">
-            <form>
+            <form action="/student_registration" method="post">
+              <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
               <div class="form-group">
                 <label for="exampleDropdownFormEmail1" class="form-label"> Name </label>
                 <input type="text" class="form-control" name="name" id="exampleDropdownFormEmail1" placeholder="Ex: Alex.......">
