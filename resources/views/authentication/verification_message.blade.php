@@ -19,7 +19,7 @@
         </div>
 
         <div class="card mb-0">
-          <div class="card-body">
+          <!-- <div class="card-body">
             <a class="btn btn-labeled btn-block text-left btn-sm btn-facebook" href="#">
               <span class="btn-label">
                 <i data-feather="facebook"></i>
@@ -32,62 +32,35 @@
               </span>
               Login with Twitter
             </a>
-          </div>
+          </div> -->
           <div class="card-seperator">
-            <span>or</span>
+            
           </div>
 
-<div>
-  @if (session('status'))
+
+
+          <div class="card-body">
+            <div>
+  
+<br>
+@if (!empty($status))
 <br>
 <div class="alert alert-success" role="alert">
   <button type="button" class="close" data-dismiss="alert">×</button>
-  {{ session('status') }}
+  {{ $status }}
 </div>
-@elseif(session('failed'))
+@elseif(!empty($failed))
 <br>
 <div class="alert alert-danger" role="alert">
   <button type="button" class="close" data-dismiss="alert">×</button>
-  {{ session('failed') }}
+  {{ $failed }}
 </div>
 @endif
 
-@if (count($errors) > 0)
-<br>
-         <div class = "alert alert-danger">
-            <ul>
-               @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
-               @endforeach
-            </ul>
-         </div>
-@endif
 </div>
-
-          <div class="card-body">
-            <form action="/student_registration" method="post">
-              <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
-              
-              <div class="form-group">
-                <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" name="email" id="exampleDropdownFormEmail1" placeholder="email@example.com">
-              </div>
-              
-              <div class="form-group">
-                <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleDropdownFormPassword1" name="password" placeholder="Password">
-              </div>
-              
-              <div class="form-group">
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck1">
-                  <label class="custom-control-label" for="customCheck1">Remember me</label>
-                </div>
-              </div>
-              <button type="submit" class="btn btn-sm btn-block btn-primary">Sign In</button>
-            </form>
           </div>
           <div class="card-footer text-center">
+            <a href="/login"><small>Login</small></a> <br>
             <a href="#"><small>Forgot your password?</small></a>
           </div>
         </div>

@@ -143,6 +143,14 @@ Route::post('/student_registration',[UserController::class, 'student_registratio
 
 Route::get('/emailverify',[UserController::class, 'verify']);
 
+Route::get('/verification/{token}',[UserController::class, 'verified']);
+
+Route::get('/authentication/verification_message',[UserController::class, 'verified']);
+
+Route::get('/verification_message',[UserController::class, 'verification_message']);
+
+Route::get('/login',[UserController::class, 'login']);
+
 Route::middleware(['student'])->group(function () {
 
 	Route::get('/student_dashboard', function () {

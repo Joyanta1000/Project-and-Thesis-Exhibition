@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Session;
+use DB;
 use App\Models\University;
 use App\Models\Department;
 use App\Models\AllUsers;
@@ -80,6 +81,7 @@ set_time_limit(1000);
 
 $id = IdGenerator::generate(['table' => 'all_users', 'length' => 10, 'prefix' =>date('ym')]);
 //output: 1910000001
+$code = Str::random(30);
 
 $to_email = $data['email'];
 $to_name = $data['name'];
@@ -90,6 +92,7 @@ $to_name = $data['name'];
                 $user->role_id = 1;
                 $user->is_active = 0;
                 $user->password = md5($data['password']);
+                $user->token = $code;
                 $user->save();
 
                 $student = new Student;
@@ -106,7 +109,7 @@ $to_name = $data['name'];
 
 
 
-$code = Str::random(30);
+
 $confirmation_code = array('confirmation_code' => $code);
 
                 Mail::send('emailverify', $confirmation_code, function($message) use ($to_email, $to_name) {
@@ -115,7 +118,7 @@ $confirmation_code = array('confirmation_code' => $code);
          $message->from('example@gmail.com','Example');
       });
 
-                return redirect()->back()->with('status',"You registered successfully");
+                return redirect()->back()->with('status',"You registered successfully, verify first");
             }
             catch(Exception $e){
                 return redirect()->back()->with('failed',"operation failed");
@@ -136,6 +139,24 @@ $confirmation_code = array('confirmation_code' => $code);
         return view('emailverify');
     }
 
+    public function verified($token)
+    {
+        $verified = DB::table('all_users')->where('token', $token)->update([ 'is_active'=> 1 ]);
+        if ($verified) {
+            
+        }
+        return view('authentication.verification_message')->with('status', 'You verified your email id successfully');
+    }
+
+    public function login()
+    {
+        return view('authentication.login');
+    }
+
+    public function verification_message()
+    {
+        return view('authentication.verification_message')->with('failed', 'Check your mail to verify or register first');
+    }
 
     public function show($id)
     {
