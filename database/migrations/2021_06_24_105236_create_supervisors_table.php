@@ -16,7 +16,7 @@ class CreateSupervisorsTable extends Migration
         Schema::create('supervisors', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('supervisor_id')->nullable();
-            $table->foreign('supervisor_id')->references('id')->on('all_users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('supervisor_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();

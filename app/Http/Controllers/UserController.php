@@ -7,8 +7,11 @@ use Session;
 use DB;
 use App\Models\University;
 use App\Models\Department;
+use App\Models\User;
 use App\Models\AllUsers;
 use App\Models\Student;
+use App\Models\Supervisor;
+use App\Models\Designation;
 use \Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -19,8 +22,17 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 use Illuminate\Support\Str;
 
+use App\Http\Controllers\Controller;
+use Auth;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
+
+
 class UserController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -32,7 +44,18 @@ class UserController extends Controller
 
         $departments = Department::all();
 
-        return view('authentication.student_register',compact('universities', 'departments'));
+        return view('authentication.student_register',compact('universities', 'departments',));
+    }
+
+    public function university_and_departments_info_for_supervisor_registration()
+    {
+        $universities = University::all();
+
+        $departments = Department::all();
+
+        $designations = Designation::all();
+
+        return view('authentication.supervisor_register',compact('universities', 'departments', 'designations'));
     }
 
     /**
@@ -55,7 +78,7 @@ class UserController extends Controller
     {
          $rules = [
             'name' => 'required|string|min:1|max:255|unique:students,name',
-            'email' => 'required|string|min:1|max:255|unique:all_users,email',
+            'email' => 'required|string|min:1|max:255|unique:users,email',
             'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/',
             'batch' => 'required|string|min:1|max:255',
             'session' => 'required|string|min:1|max:255',
@@ -79,14 +102,14 @@ class UserController extends Controller
 
 set_time_limit(1000);
 
-$id = IdGenerator::generate(['table' => 'all_users', 'length' => 10, 'prefix' =>date('ym')]);
+$id = IdGenerator::generate(['table' => 'users', 'length' => 10, 'prefix' =>date('ym')]);
 //output: 1910000001
 $code = Str::random(30);
 
 $to_email = $data['email'];
 $to_name = $data['name'];
 
-                $user = new AllUsers;
+                $user = new User;
                 $user->id = $id;
                 $user->email = $to_email;
                 $user->role_id = 1;
@@ -126,6 +149,77 @@ $confirmation_code = array('confirmation_code' => $code);
         }
     }
 
+    public function supervisor_registration(Request $request)
+    {
+         $rules = [
+            'name' => 'required|string|min:1|max:255|unique:students,name',
+            'email' => 'required|string|min:1|max:255|unique:users,email',
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'university_id' => 'required',
+            'department_id' => 'required',
+            'designation_id' => 'required',
+            'password' => 'min:6|required_with:password_confirmation|same:confirm_password',
+            'confirm_password' => 'min:6'
+            // 'city_name' => 'required|string|min:3|max:255',
+            // 'email' => 'required|string|email|max:255'
+        ];
+        $validator = Validator::make($request->all(),$rules);
+        if ($validator->fails()) {
+            return redirect()->back()
+            ->withInput()
+            ->withErrors($validator);
+        }
+        else{
+            $data = $request->input();
+            try{
+
+set_time_limit(1000);
+
+$id = IdGenerator::generate(['table' => 'users', 'length' => 10, 'prefix' =>date('ym')]);
+//output: 1910000001
+$code = Str::random(30);
+
+$to_email = $data['email'];
+$to_name = $data['name'];
+
+                $user = new User;
+                $user->id = $id;
+                $user->email = $to_email;
+                $user->role_id = 2;
+                $user->is_active = 0;
+                $user->password = md5($data['password']);
+                $user->token = $code;
+                $user->save();
+
+                $supervisor = new Supervisor;
+                $supervisor->name = $to_name;
+                $supervisor->supervisor_id = $id;
+                $supervisor->phone = $data['phone'];
+                $supervisor->slug = 'Supervisor'.'_'.$data['name'];
+                $supervisor->university_id = $data['university_id'];
+                $supervisor->department_id = $data['department_id'];
+                $supervisor->designation_id = $data['designation_id'];
+                $supervisor->save();
+
+
+
+
+$confirmation_code = array('confirmation_code' => $code);
+
+                Mail::send('emailverify', $confirmation_code, function($message) use ($to_email, $to_name) {
+         $message->to( $to_email , $to_name )->subject
+            ('Email verification mail');
+         $message->from('example@gmail.com','Example');
+      });
+
+                return redirect()->back()->with('status',"You registered successfully, verify first");
+            }
+            catch(Exception $e){
+                return redirect()->back()->with('failed',"operation failed");
+            }
+        }
+    }
+
     /**
      * Display the specified resource.
      *
@@ -141,7 +235,7 @@ $confirmation_code = array('confirmation_code' => $code);
 
     public function verified($token)
     {
-        $verified = DB::table('all_users')->where('token', $token)->update([ 'is_active'=> 1 ]);
+        $verified = DB::table('users')->where('token', $token)->update([ 'is_active'=> 1 ]);
         if ($verified) {
             
         }

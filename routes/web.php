@@ -11,7 +11,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\Auth\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,11 +27,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/add_types', function () {
-    return view('admin.pages.add_types');
-});
+Route::get('/User_Login',[UserController::class, 'login']);
 
-Route::post('/insert_type',[TypeController::class, 'insert_type']);
+Route::post('/login',[LoginController::class, 'redirectTo']);
+
+Route::middleware(['isUser'])->group(function () {
+    
+    Route::get('/admin',[LoginController::class, 'index']);
+
+    Route::get('/add_types', function () {
+        return view('admin.pages.add_types');
+    });
+
+    Route::post('/insert_type',[TypeController::class, 'insert_type']);
 
 Route::get('/types',[TypeController::class, 'index']);
 
@@ -137,6 +145,9 @@ Route::post('/update_achievements_information/{id}',[AchievementController::clas
 
 Route::get('/delete_achievements_information/{id}',[AchievementController::class, 'delete_achievements_information']);
 
+  });
+  
+
 Route::get('student_register',[UserController::class, 'index']);
 
 Route::post('/student_registration',[UserController::class, 'student_registration']);
@@ -149,12 +160,26 @@ Route::get('/authentication/verification_message',[UserController::class, 'verif
 
 Route::get('/verification_message',[UserController::class, 'verification_message']);
 
-Route::get('/login',[UserController::class, 'login']);
+Route::get('supervisor_register',[UserController::class, 'university_and_departments_info_for_supervisor_registration']);
 
-Route::middleware(['student'])->group(function () {
+Route::post('/supervisor_registration',[UserController::class, 'supervisor_registration']);
 
-	Route::get('/student_dashboard', function () {
-    return view('student.student_dashboard');
+
+Route::get('/student_dashboard', function () {
+    return view('student.pages.index');
 });
+
+Route::get('/supervisor_dashboard', function () {
+    return view('supervisor.pages.index');
+});
+
+
+// Route::middleware(['student'])->group(function () {
+
+// 	Route::get('/student_dashboard', function () {
+//     return view('student.student_dashboard');
+// });
     
-});
+// });
+
+

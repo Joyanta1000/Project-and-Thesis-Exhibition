@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>AdminX - SignIn</title>
+    <title>AdminX - SignUp</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -65,26 +65,62 @@
 </div>
 
           <div class="card-body">
-            <form action="/login" method="post">
+            <form action="/supervisor_registration" method="post">
               <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
-              
+              <div class="form-group">
+                <label for="exampleDropdownFormEmail1" class="form-label"> Name </label>
+                <input type="text" class="form-control" name="name" id="exampleDropdownFormEmail1" placeholder="Ex: Alex.......">
+              </div>
               <div class="form-group">
                 <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
                 <input type="email" class="form-control" name="email" id="exampleDropdownFormEmail1" placeholder="email@example.com">
               </div>
-              
+              <div class="form-group">
+                <label for="exampleDropdownFormEmail1" class="form-label"> Phone Number </label>
+                <input type="text" class="form-control" name="phone" id="exampleDropdownFormEmail1" placeholder="Ex: +8801627......">
+              </div>
+              <div class="form-group">
+                <label for="exampleDropdownFormEmail1" class="form-label"> University Name </label>
+                <select type="text" class="form-control" name="university_id" id="exampleDropdownFormEmail1" placeholder="Ex: Oxford">
+                  <option>--Select--</option>
+                  @foreach ($universities as $university)
+                  <option value="{{$university->id}}">{{$university->name}}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleDropdownFormEmail1" class="form-label"> Department Name </label>
+                <select type="text" class="form-control" name="department_id" id="exampleDropdownFormEmail1" placeholder="Ex: Computer Science/CSE">
+                  <option>--Select--</option>
+                  @foreach ($departments as $department)
+                  <option value="{{$department->id}}">{{$department->name}}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleDropdownFormEmail1" class="form-label"> Designation Name </label>
+                <select type="text" class="form-control" name="designation_id" id="exampleDropdownFormEmail1">
+                  <option>--Select--</option>
+                  @foreach ($designations as $designation)
+                  <option value="{{$designation->id}}">{{$designation->name}}</option>
+                  @endforeach
+                </select>
+              </div>
               <div class="form-group">
                 <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
                 <input type="password" class="form-control" id="exampleDropdownFormPassword1" name="password" placeholder="Password">
               </div>
-              
+              <div class="form-group">
+                <label for="exampleDropdownFormPassword1" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="exampleDropdownFormPassword1" name="confirm_password" placeholder="Confirm Password">
+              </div>
               <div class="form-group">
                 <div class="custom-control custom-checkbox">
                   <input type="checkbox" class="custom-control-input" id="customCheck1">
                   <label class="custom-control-label" for="customCheck1">Remember me</label>
                 </div>
               </div>
-              <button type="submit" name="submit" class="btn btn-sm btn-block btn-primary">Sign In</button>
+              <button type="submit" class="btn btn-sm btn-block btn-primary">Sign Up</button>
             </form>
           </div>
           <div class="card-footer text-center">
