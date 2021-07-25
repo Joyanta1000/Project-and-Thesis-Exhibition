@@ -65,30 +65,19 @@
 </div>
 
           <div class="card-body">
-            <form action="/login" method="post">
+            <form action="/reset_user_password/{{$user->email}}" method="post">
               <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
-              
+    
               <div class="form-group">
-                <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" name="email" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                <label for="exampleDropdownFormEmail1" class="form-label">New Password</label>
+                <input type="password" class="form-control" name="password" id="exampleDropdownFormEmail1" placeholder="New Password">
               </div>
-              
               <div class="form-group">
-                <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleDropdownFormPassword1" name="password" placeholder="Password">
+                <label for="exampleDropdownFormEmail1" class="form-label">Confirm New Password</label>
+                <input type="password" class="form-control" name="confirm_password" id="exampleDropdownFormEmail1" placeholder="Confirm New Password">
               </div>
-              
-              <div class="form-group">
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="customCheck1">
-                  <label class="custom-control-label" for="customCheck1">Remember me</label>
-                </div>
-              </div>
-              <button type="submit" name="submit" class="btn btn-sm btn-block btn-primary">Sign In</button>
+              <button type="submit" name="submit" class="btn btn-sm btn-block btn-primary">Change Password</button>
             </form>
-          </div>
-          <div class="card-footer text-center">
-            <a href="/reset"><small>Forgot your password?</small></a>
           </div>
         </div>
       </div>

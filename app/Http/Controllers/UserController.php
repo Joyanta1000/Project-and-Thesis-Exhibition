@@ -252,9 +252,99 @@ $confirmation_code = array('confirmation_code' => $code);
         return view('authentication.verification_message')->with('failed', 'Check your mail to verify or register first');
     }
 
-    public function show($id)
+    public function send_mail_to_reset_password(Request $request)
     {
-        //
+        $rules = [
+            'email' => 'required|string|min:1|max:255|exists:users,email',
+            // 'city_name' => 'required|string|min:3|max:255',
+            // 'email' => 'required|string|email|max:255'
+        ];
+        $validator = Validator::make($request->all(),$rules);
+        if ($validator->fails()) {
+            return redirect()->back()
+            ->withInput()
+            ->withErrors($validator);
+        }
+        else{
+            $data = $request->input();
+            try{
+
+set_time_limit(1000);
+
+
+
+$to_email = $data['email'];
+
+
+$user = User::where('email','=',$to_email)
+    ->first();
+
+               $token = $user->token;
+
+
+
+
+$token = array('token' => $token);
+
+                Mail::send('reset_password_mail', $token, function($message) use ($to_email) {
+         $message->to( $to_email )->subject
+            ('Reset Your Password');
+         $message->from('example@gmail.com','Example');
+      });
+
+                return redirect()->back()->with('status',"Your mail send successfully");
+            }
+            catch(Exception $e){
+                return redirect()->back()->with('failed',"operation failed");
+            }
+        }
+    }
+
+    public function reset_password_mail()
+    {
+        return view('reset_password_mail');
+    }
+
+    public function reset_password($token)
+    {
+
+        $user = User::where('token','=',$token)->first();
+
+        return view('reset_password',compact('user'));
+               
+    }
+
+    public function reset_user_password(Request $request, $email)
+    {
+        $rules = [
+            'password' => 'min:6|required_with:password_confirmation|same:confirm_password',
+            'confirm_password' => 'min:6'
+            // 'city_name' => 'required|string|min:3|max:255',
+            // 'email' => 'required|string|email|max:255'
+        ];
+        $validator = Validator::make($request->all(),$rules);
+        if ($validator->fails()) {
+            return redirect()->back()
+            ->withInput()
+            ->withErrors($validator);
+        }
+        else{
+            $data = $request->input();
+            try{
+
+set_time_limit(1000);
+
+$code = Str::random(30);
+
+$user = DB::table('users')->where('email', $email)->update([ 'password'=> md5($data['password']), 'token' =>  $code]);
+
+ return view('authentication.login')->with('status',"Your password updated successfully");
+
+            }
+            catch(Exception $e){
+                return redirect()->back()->with('failed',"operation failed");
+            }
+        }
     }
 
     /**

@@ -66,7 +66,7 @@ class Kernel extends HttpKernel
         'student' => \Illuminate\Auth\Middleware\student::class,
         'supervisor' => \Illuminate\Auth\Middleware\supervisor::class,
         'isUser' => \App\Http\Middleware\UserMiddleware::class,
-        'isStudent' => \App\Http\Middleware\IsStudentMiddleware::class,
-        'isSupervisor' => \App\Http\Middleware\IsSupervisorMiddleware::class,
+        'isStudent' => \App\Http\Middleware\IsStudent::class,
+        'isSupervisor' => \App\Http\Middleware\IsSupervisor::class,
     ];
 }

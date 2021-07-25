@@ -31,6 +31,18 @@ Route::get('/User_Login',[UserController::class, 'login']);
 
 Route::post('/login',[LoginController::class, 'redirectTo']);
 
+Route::post('/send_mail_to_reset_password',[UserController::class, 'send_mail_to_reset_password']);
+
+Route::get('/reset_password_mail',[UserController::class, 'reset_password_mail']);
+
+Route::get('/reset_password/{token}',[UserController::class, 'reset_password']);
+
+Route::post('/reset_user_password/{email}',[UserController::class, 'reset_user_password']);
+
+Route::get('/reset', function () {
+    return view('info_for_reset');
+});
+
 Route::middleware(['isUser'])->group(function () {
     
     Route::get('/admin',[LoginController::class, 'index']);
