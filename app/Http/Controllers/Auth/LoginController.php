@@ -36,6 +36,16 @@ class LoginController extends Controller
         return view('admin/pages/index');
      }
 
+     public function IndexForStudent()
+     {
+        return view('student/pages/index');
+     }
+
+     public function IndexForSupervisor()
+     {
+        return view('supervisor/pages/index');
+     }
+
 public function redirectTo(Request $request){
 
 
@@ -57,12 +67,10 @@ public function redirectTo(Request $request){
             return $this->index();
         break;
         case 1:
-            $this->redirectTo = '/student';
-            return $this->redirectTo;
+            return $this->IndexForStudent();
         break;
         case 2:
-            $this->redirectTo = '/supervisor';
-            return $this->redirectTo;
+            return $this->IndexForSupervisor();
         break;
         default:
         $this->redirectTo = '/User_Login';

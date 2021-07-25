@@ -164,15 +164,21 @@ Route::get('supervisor_register',[UserController::class, 'university_and_departm
 
 Route::post('/supervisor_registration',[UserController::class, 'supervisor_registration']);
 
-
+Route::middleware(['isStudent'])->group(function () {
+    
 Route::get('/student_dashboard', function () {
     return view('student.pages.index');
 });
+
+});
+
+Route::middleware(['isSupervisor'])->group(function () {
 
 Route::get('/supervisor_dashboard', function () {
     return view('supervisor.pages.index');
 });
 
+});
 
 // Route::middleware(['student'])->group(function () {
 

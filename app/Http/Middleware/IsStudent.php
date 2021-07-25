@@ -5,7 +5,7 @@ use Session;
 use Closure;
 use Illuminate\Http\Request;
 
-class UserMiddleware
+class IsStudent
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class UserMiddleware
     public function handle(Request $request, Closure $next)
     {
         if(Session::has('email')){
-            if(session()->get('role_id')==0){
+            if(session()->get('role_id')==1){
                 return $next($request);
             }
             else{
