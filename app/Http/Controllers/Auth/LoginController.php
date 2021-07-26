@@ -33,17 +33,17 @@ class LoginController extends Controller
 
      public function index()
      {
-        return view('admin/pages/index');
+        return redirect('admin');
      }
 
      public function IndexForStudent()
      {
-        return view('student/pages/index');
+        return redirect('student_dashboard');
      }
 
      public function IndexForSupervisor()
      {
-        return view('supervisor/pages/index');
+        return redirect('supervisor_dashboard');
      }
 
 public function redirectTo(Request $request){
@@ -59,6 +59,7 @@ public function redirectTo(Request $request){
     $request->session()->put('email',$obj->email);
     $request->session()->put('password',$obj->password);
     $request->session()->put('role_id',$obj->role_id);
+    $request->session()->put('is_active',$obj->is_active);
 
     //Session::put('email', $value);
 

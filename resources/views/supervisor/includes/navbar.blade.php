@@ -79,7 +79,10 @@
               <a class="dropdown-item" href="#">My Tasks</a>
               <a class="dropdown-item" href="#">Settings</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item text-danger" href="#">Sign out</a>
+              <form method="post" action="{{URL::to('logout')}}" id="logout">
+                                    {{csrf_field()}}
+                                    <a href="#" class="dropdown-item text-danger" onclick="getElementById('logout').submit()">Sign out</a>
+                                </form>
             </div>
           </li>
         </ul>

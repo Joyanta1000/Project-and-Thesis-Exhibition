@@ -31,6 +31,8 @@ Route::get('/User_Login',[UserController::class, 'login']);
 
 Route::post('/login',[LoginController::class, 'redirectTo']);
 
+Route::post('/logout',[UserController::class, 'logout']);
+
 Route::post('/send_mail_to_reset_password',[UserController::class, 'send_mail_to_reset_password']);
 
 Route::get('/reset_password_mail',[UserController::class, 'reset_password_mail']);
@@ -44,8 +46,10 @@ Route::get('/reset', function () {
 });
 
 Route::middleware(['isUser'])->group(function () {
-    
-    Route::get('/admin',[LoginController::class, 'index']);
+
+    Route::get('/admin', function () {
+        return view('admin.pages.index');
+    });
 
     Route::get('/add_types', function () {
         return view('admin.pages.add_types');

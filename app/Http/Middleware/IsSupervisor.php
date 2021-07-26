@@ -17,12 +17,15 @@ class IsSupervisor
     public function handle(Request $request, Closure $next)
     {
         if(Session::has('email')){
-            if(session()->get('role_id')==2){
+            if(session()->get('role_id')==2 && session()->get('is_active')==1){
                 return $next($request);
             }
             else{
                 return redirect('/User_Login');
             }
+        }
+        else{
+            return redirect('/User_Login');
         }
     }
 }

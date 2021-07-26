@@ -338,7 +338,7 @@ $code = Str::random(30);
 
 $user = DB::table('users')->where('email', $email)->update([ 'password'=> md5($data['password']), 'token' =>  $code]);
 
- return view('authentication.login')->with('status',"Your password updated successfully");
+ return redirect('User_Login')->with('status',"Your password updated successfully");
 
             }
             catch(Exception $e){
@@ -380,4 +380,11 @@ $user = DB::table('users')->where('email', $email)->update([ 'password'=> md5($d
     {
         //
     }
+    
+    public function logout(Request $request)
+    {
+      $request->session()->flush();
+      return redirect('User_Login');
+    }
+
 }
