@@ -186,6 +186,10 @@ Route::get('/student_dashboard', function () {
     return view('student.pages.index');
 });
 
+Route::get('/add_project_or_thesis', function () {
+    return view('student.pages.add_project_or_thesis');
+});
+
 });
 
 Route::middleware(['isSupervisor'])->group(function () {
