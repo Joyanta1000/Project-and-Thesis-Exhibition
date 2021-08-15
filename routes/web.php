@@ -12,6 +12,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ProjectOrThesisController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -186,9 +187,7 @@ Route::get('/student_dashboard', function () {
     return view('student.pages.index');
 });
 
-Route::get('/add_project_or_thesis', function () {
-    return view('student.pages.add_project_or_thesis');
-});
+Route::get('/add_project_or_thesis',[ProjectOrThesisController::class, 'index']);
 
 });
 

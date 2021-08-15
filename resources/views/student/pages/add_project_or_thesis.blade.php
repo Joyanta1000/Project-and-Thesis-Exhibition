@@ -40,12 +40,17 @@
                     <div class="card-header-title">Input Formats</div>
                   </div>
                   <div class="card-body">
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label class="form-label">Credit Card</label>
                       <input class="form-control mb-2 input-credit-card" type="text" placeholder="Enter credit card number">
+                    </div> -->
+                    
+                    <div class="form-group">
+                      <label class="form-label">Name</label>
+                      <input class="form-control mb-2" type="text" placeholder="Enter name">
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label class="form-label">Date</label>
                       <input class="form-control input-date mb-2" type="text" placeholder="YYYY/MM/DD">
                     </div>
@@ -53,12 +58,12 @@
                     <div class="form-group">
                       <label class="form-label">Numeral formatting</label>
                       <input class="form-control input-numeral mb-2" type="text" placeholder="Enter a large number">
-                    </div>
+                    </div> -->
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label class="form-label">Prefix</label>
                       <input class="form-control input-prefix mb-2" type="text">
-                    </div>
+                    </div> -->
                   </div>
                   <div class="card-footer">
                     Cleave.js is a small library for input formatting. Check out their <a href="http://nosir.github.io/cleave.js/" target="_blank">documentation</a>. <strong>Nice to know:</strong> There are also Angular and ReactJS components available.
@@ -71,31 +76,52 @@
                   </div>
                   <div class="card-body">
                     <div class="form-group">
-                      <label class="form-label">Single Select</label>
+                      <label class="form-label">Select Type</label>
                       <select name="select" class="form-control js-choice">
-                        <option value="1">Sample value</option>
-                        <option value="2">Sample value 2</option>
-                        <option value="3">Sample value 3</option>
+                      <option>Select</option>
+                        @foreach($types as $type)
+                        <option value="{{$type->id}}">{{$type->name}}</option>
+                        @endforeach
                       </select>
                     </div>
 
                     <div class="form-group">
+                      <label class="form-label">Select Category</label>
+                      <select name="select" class="form-control js-choice">
+                      <option>Select</option>
+                      @foreach($categories as $category)
+                        <option value="{{$category->id}}">{{$category->name}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label">Select Reference</label>
+                      <select name="select" class="form-control js-choice">
+                      <option>Select</option>
+                      @foreach($supervisors as $supervisor)
+                        <option value="{{$supervisor->id}}">{{$supervisor->name}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+
+                    <!-- <div class="form-group">
                       <label class="form-label">Multiple Select</label>
                       <select name="select" multiple class="form-control js-choice">
                         <option value="1">Sample value</option>
                         <option value="2" selected>Sample value 2</option>
                         <option value="3">Sample value 3</option>
                       </select>
-                    </div>
+                    </div> -->
 
-                    <div class="form-group mb-0">
+                    <!-- <div class="form-group mb-0">
                       <label class="form-label">Multople Select With remove icon</label>
                       <select name="select" multiple class="form-control js-choice-remove">
                         <option value="1">Sample value</option>
                         <option value="2" selected>Sample value 2</option>
                         <option value="3">Sample value 3</option>
                       </select>
-                    </div>
+                    </div> -->
                   </div>
                   <div class="card-footer">
                     Choices.js is a fantastic library for custom selects with tons of options. Check out their <a href="https://joshuajohnson.co.uk/Choices/" target="_blank">documentation</a> for more options and examples.
@@ -109,26 +135,37 @@
                     <div class="card-header-title">Date Picker</div>
                   </div>
                   <div class="card-body">
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label class="form-label">Date Picker Default</label>
                       <input class="form-control mb-2 date-default" type="text" placeholder="Pick date">
-                    </div>
+                    </div> -->
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label class="form-label">Date &amp; Time Picker</label>
                       <input class="form-control mb-2 date-time" type="text" placeholder="Pick date and time">
-                    </div>
+                    </div> -->
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label class="form-label">Humand friendly date</label>
                       <input class="form-control date-human" type="text" placeholder="Pick date">
                       <small id="emailHelp" class="form-text text-muted mb-2">Recommended for better UX</small>
+                    </div> -->
+
+                    <!-- <div class="form-group">
+                      <label class="form-label">Inline Calendar</label>
+                      <input class="form-control mb-2 date-inline" type="text" placeholder="Pick date">
+                    </div> -->
+
+                    <div class="form-group">
+                      <label class="form-label">Description</label>
+                      <textarea class="form-control mb-2" type="text" placeholder="Enter description"></textarea>
                     </div>
 
                     <div class="form-group">
-                      <label class="form-label">Inline Calendar</label>
-                      <input class="form-control mb-2 date-inline" type="text" placeholder="Pick date">
+                      <label class="form-label">Project or Thesis File</label>
+                      <input class="form-control mb-2" type="file">
                     </div>
+
                   </div>
                   <div class="card-footer">
                     <a href="https://chmln.github.io/flatpickr/" target="_blank">Flatpickr</a> is a light-weight library for picking dates and times. It is feature rich and supports date ranges, disabling dates, multiple dates and many more.
