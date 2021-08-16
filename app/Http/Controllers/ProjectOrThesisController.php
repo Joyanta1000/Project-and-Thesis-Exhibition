@@ -7,6 +7,13 @@ use Session;
 use App\Models\Type;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\Project_or_Thesis;
+use App\Models\File;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
+use \Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 class ProjectOrThesisController extends Controller
 {
@@ -41,9 +48,62 @@ class ProjectOrThesisController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function insert_project_or_thesis(Request $request)
     {
-        //
+        $rules = [
+            'name' => 'required',
+            'type_id' => 'required',
+            'category_id' => 'required',
+            'reference' => 'required',
+            'description' => 'required',
+            'file_url' => 'required',
+            // 'email' => 'required|string|email|max:255'
+        ];
+        $validator = Validator::make($request->all(),$rules);
+        if ($validator->fails()) {
+            return redirect()
+            ->back()
+            ->withInput()
+            ->withErrors($validator);
+        }
+        else{
+            $data = $request->input();
+            try{
+
+                $id = IdGenerator::generate(['table' => 'project_or__theses', 'length' => 10, 'prefix' =>date('ym')]);
+                
+                $name = $data['name'];
+                $type_id = $data['type_id'];
+                $category_id = $data['category_id'];
+                $reference = $data['reference'];
+                $description = $data['description'];
+
+                $Project_or_Thesis = new Project_or_Thesis;
+                $Project_or_Thesis->id = $id;
+                $Project_or_Thesis->name = $name;
+                $Project_or_Thesis->type_id = $type_id;
+                $Project_or_Thesis->category_id = $category_id;
+                $Project_or_Thesis->reference = $reference;
+                $Project_or_Thesis->save();
+                
+                $extra_1 = Str::random(32);
+
+                $File = new File;
+                $File->project_id = $id;
+                $file = $request->file('file_url');
+                $files_name = time() . '.' . $extra_1 . '.' . $file->getClientOriginalExtension();
+                $files_path = public_path('/ProjectOrThesisFiles/');
+                $file->move($files_path,$files_name);
+                $File->file_url ='/ProjectOrThesisFiles/' . $files_name;
+                $File->description = $description;
+                $File->save();
+
+                return redirect()->back()->with('status',"Project or Thesis Added Successfully");
+            }
+            catch(Exception $e){
+                return redirect()->back()->with('failed',"operation failed");
+            }
+        }
     }
 
     /**

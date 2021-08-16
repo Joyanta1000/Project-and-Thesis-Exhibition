@@ -189,6 +189,8 @@ Route::get('/student_dashboard', function () {
 
 Route::get('/add_project_or_thesis',[ProjectOrThesisController::class, 'index']);
 
+Route::post('/insert_project_or_thesis',[ProjectOrThesisController::class, 'insert_project_or_thesis']);
+
 });
 
 Route::middleware(['isSupervisor'])->group(function () {

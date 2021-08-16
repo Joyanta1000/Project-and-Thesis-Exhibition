@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" type="text/css" href="../components/dist/css/adminx.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../components/dist/css/adminx.css" media="screen" />
   </head>
   <body>
     <div class="adminx-container">
@@ -33,6 +34,35 @@
               <h1>Advanced Elements</h1>
             </div>
 
+  
+            @if (session('status'))
+<br>
+<div class="alert alert-success" role="alert">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  {{ session('status') }}
+</div>
+@elseif(session('failed'))
+<br>
+<div class="alert alert-danger" role="alert">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  {{ session('failed') }}
+</div>
+@endif
+
+@if (count($errors) > 0)
+<br>
+         <div class = "alert alert-danger">
+            <ul>
+               @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+               @endforeach
+            </ul>
+         </div>
+@endif
+
+
+<form action="/insert_project_or_thesis" method="post" enctype="multipart/form-data">
+@csrf
             <div class="row">
               <div class="col-lg-6">
                 <div class="card mb-grid">
@@ -47,7 +77,7 @@
                     
                     <div class="form-group">
                       <label class="form-label">Name</label>
-                      <input class="form-control mb-2" type="text" placeholder="Enter name">
+                      <input class="form-control mb-2" type="text" name="name" placeholder="Enter name">
                     </div>
 
                     <!-- <div class="form-group">
@@ -77,7 +107,7 @@
                   <div class="card-body">
                     <div class="form-group">
                       <label class="form-label">Select Type</label>
-                      <select name="select" class="form-control js-choice">
+                      <select name="type_id" class="form-control js-choice">
                       <option>Select</option>
                         @foreach($types as $type)
                         <option value="{{$type->id}}">{{$type->name}}</option>
@@ -87,7 +117,7 @@
 
                     <div class="form-group">
                       <label class="form-label">Select Category</label>
-                      <select name="select" class="form-control js-choice">
+                      <select name="category_id" class="form-control js-choice">
                       <option>Select</option>
                       @foreach($categories as $category)
                         <option value="{{$category->id}}">{{$category->name}}</option>
@@ -97,10 +127,10 @@
 
                     <div class="form-group">
                       <label class="form-label">Select Reference</label>
-                      <select name="select" class="form-control js-choice">
+                      <select name="reference" class="form-control js-choice">
                       <option>Select</option>
                       @foreach($supervisors as $supervisor)
-                        <option value="{{$supervisor->id}}">{{$supervisor->name}}</option>
+                        <option value="{{$supervisor->name}}">{{$supervisor->name}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -158,12 +188,12 @@
 
                     <div class="form-group">
                       <label class="form-label">Description</label>
-                      <textarea class="form-control mb-2" type="text" placeholder="Enter description"></textarea>
+                      <textarea class="form-control mb-2" name="description" type="text" placeholder="Enter description"></textarea>
                     </div>
 
                     <div class="form-group">
                       <label class="form-label">Project or Thesis File</label>
-                      <input class="form-control mb-2" type="file">
+                      <input class="form-control mb-2" name="file_url" type="file">
                     </div>
 
                   </div>
@@ -172,7 +202,14 @@
                   </div>
                 </div>
               </div>
+
+              <div class="col-lg-6">
+                <div class="card mb-grid">
+                <button type="submit" name="submit" class="btn btn-pill btn-outline-light">Add Items</button>
+                </div>
+              </div>
             </div>
+</form>
           </div>
         </div>
       </div>
