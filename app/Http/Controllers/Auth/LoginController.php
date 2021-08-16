@@ -56,6 +56,7 @@ public function redirectTo(Request $request){
     ->where('password','=',$password)
     ->first();
 
+    $request->session()->put('id',$obj->id);
     $request->session()->put('email',$obj->email);
     $request->session()->put('password',$obj->password);
     $request->session()->put('role_id',$obj->role_id);

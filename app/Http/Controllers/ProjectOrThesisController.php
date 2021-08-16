@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\User;
 use App\Models\Project_or_Thesis;
 use App\Models\File;
+use App\Models\Assigned_Student;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use \Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
@@ -56,7 +57,7 @@ class ProjectOrThesisController extends Controller
             'category_id' => 'required',
             'reference' => 'required',
             'description' => 'required',
-            'file_url' => 'required',
+            'file_url' => 'required|mimes:jpeg,bmp,png,gif,svg,pdf',
             // 'email' => 'required|string|email|max:255'
         ];
         $validator = Validator::make($request->all(),$rules);
@@ -97,6 +98,12 @@ class ProjectOrThesisController extends Controller
                 $File->file_url ='/ProjectOrThesisFiles/' . $files_name;
                 $File->description = $description;
                 $File->save();
+
+                $Assigned_Student = new Assigned_Student;
+                $Assigned_Student->project_id = $id;
+                $Assigned_Student->student_id = Session::get('id');
+                $Assigned_Student->is_active = 1;
+                $Assigned_Student->save();
 
                 return redirect()->back()->with('status',"Project or Thesis Added Successfully");
             }
