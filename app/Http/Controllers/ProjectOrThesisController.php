@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Session;
+use DB;
 use App\Models\Type;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Project_or_Thesis;
 use App\Models\File;
+use App\Models\Students;
 use App\Models\Assigned_Student;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use \Illuminate\Http\Response;
@@ -85,6 +87,7 @@ class ProjectOrThesisController extends Controller
                 $Project_or_Thesis->type_id = $type_id;
                 $Project_or_Thesis->category_id = $category_id;
                 $Project_or_Thesis->reference = $reference;
+                $Project_or_Thesis->is_active = 0;
                 $Project_or_Thesis->save();
                 
                 $extra_1 = Str::random(32);
@@ -112,6 +115,92 @@ class ProjectOrThesisController extends Controller
             }
         }
     }
+
+    public function project_or_thesis_show(){
+
+        $id = Session::get('id');
+//dd($id);
+        $Project_or_Thesis = DB::table('project_or__theses')
+            ->join('types', 'project_or__theses.type_id', '=', 'types.id')
+            ->join('categories', 'project_or__theses.category_id', '=', 'categories.id')
+            ->join('files', 'project_or__theses.id', '=', 'files.project_id')
+            ->join('assigned__students', 'project_or__theses.id', '=', 'assigned__students.project_id')
+            //->join('assigned__supervisors', 'project_or__theses.id', '=', 'assigned__supervisors.project_id')
+            ->select('project_or__theses.*', 'types.name as typeName', 'categories.name as categoryName', 'files.description', 'files.type', 'files.file_url', 'assigned__students.student_id')
+            ->where('assigned__students.student_id', '=', $id)
+            ->get();
+//dd($Project_or_Thesis[0]->id);
+             $Assigned_Student = DB::table('project_or__theses')
+             ->join('assigned__students', 'project_or__theses.id', '=', 'assigned__students.project_id')
+            // //->join('assigned__supervisors', 'project_or__theses.id', '=', 'assigned__supervisors.project_id')
+             ->select('assigned__students.student_id')
+             ->where('assigned__students.project_id', '=', $Project_or_Thesis[0]->id)
+             ->get();
+
+             //dd($Assigned_Student[0]->student_id);
+
+             $Students_Details = DB::table('students')
+             ->join('assigned__students', 'students.student_id', '=', 'assigned__students.student_id')
+             // //->join('assigned__supervisors', 'project_or__theses.id', '=', 'assigned__supervisors.project_id')
+              ->select('students.name')
+              ->where('students.student_id', '=', $Assigned_Student[0]->student_id)
+              ->get();
+//dd($Students_Details);
+
+         return view('student.pages.project_and_thesis_list',compact('Project_or_Thesis', 'Assigned_Student', 'Students_Details'));
+    }
+
+
+    public function view_project_or_thesis_info($id){
+
+        $projectId = $id;
+        $id = Session::get('id');
+//dd($id);
+        $Project_or_Thesis = DB::table('project_or__theses')
+            ->join('types', 'project_or__theses.type_id', '=', 'types.id')
+            ->join('categories', 'project_or__theses.category_id', '=', 'categories.id')
+            ->join('files', 'project_or__theses.id', '=', 'files.project_id')
+            ->join('assigned__students', 'project_or__theses.id', '=', 'assigned__students.project_id')
+            //->join('assigned__supervisors', 'project_or__theses.id', '=', 'assigned__supervisors.project_id')
+            ->select('project_or__theses.*', 'types.name as typeName', 'categories.name as categoryName', 'files.description', 'files.type', 'files.file_url', 'assigned__students.student_id')
+            ->where('assigned__students.student_id', '=', $id, 'and', 'project_or__theses.id', '=', $projectId )
+            ->get();
+//dd($Project_or_Thesis[0]);
+             $Assigned_Student = DB::table('project_or__theses')
+             ->join('assigned__students', 'project_or__theses.id', '=', 'assigned__students.project_id')
+            // //->join('assigned__supervisors', 'project_or__theses.id', '=', 'assigned__supervisors.project_id')
+             ->select('assigned__students.student_id')
+             ->where('assigned__students.project_id', '=', $Project_or_Thesis[0]->id)
+             ->get();
+
+             //dd($Assigned_Student);
+
+             $myArr = [];
+
+             
+             
+
+             foreach($Assigned_Student as $key => $value)
+{
+	//dd($value->student_id);
+    $Students_Details = DB::table('students')
+             ->join('assigned__students', 'students.student_id', '=', 'assigned__students.student_id')
+             // //->join('assigned__supervisors', 'project_or__theses.id', '=', 'assigned__supervisors.project_id')
+              ->select('students.name')
+              ->where('students.student_id', '=', $value->student_id)
+              ->get();
+    array_push($myArr, $Students_Details);
+}
+
+//dd($myArr);
+
+             
+//dd($Students_Details);
+
+         return view('student.pages.project_or_thesis_details',compact('Project_or_Thesis', 'Assigned_Student', 'Students_Details'));
+    }
+
+
 
     /**
      * Display the specified resource.

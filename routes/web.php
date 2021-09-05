@@ -191,6 +191,10 @@ Route::get('/add_project_or_thesis',[ProjectOrThesisController::class, 'index'])
 
 Route::post('/insert_project_or_thesis',[ProjectOrThesisController::class, 'insert_project_or_thesis']);
 
+Route::get('/project_and_thesis_list',[ProjectOrThesisController::class, 'project_or_thesis_show']);
+
+Route::get('/view_project_or_thesis_info/{id}',[ProjectOrThesisController::class, 'view_project_or_thesis_info']);
+
 });
 
 Route::middleware(['isSupervisor'])->group(function () {
