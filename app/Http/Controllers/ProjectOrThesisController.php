@@ -175,10 +175,10 @@ class ProjectOrThesisController extends Controller
 
              //dd($Assigned_Student);
 
-             $myArr = [];
+            //  $myArr = [];
 
              
-             
+             $Assigned_Students_Info = array();
 
              foreach($Assigned_Student as $key => $value)
 {
@@ -189,15 +189,31 @@ class ProjectOrThesisController extends Controller
               ->select('students.name')
               ->where('students.student_id', '=', $value->student_id)
               ->get();
-    array_push($myArr, $Students_Details);
+            //   dd(Students_Details);
+                
+      array_push($Assigned_Students_Info, $Students_Details[0]->name);
+    //print_r($Students_Details[0]->name);
+    
 }
+//die();
+
+//     var_dump($Assigned_Students_Info);
+//    die();
+// foreach($Arr as $key => $value)
+// {
+//     print_r($value);
+//     // print_r(",");
+    
+// }
+
+// die();
 
 //dd($myArr);
 
              
 //dd($Students_Details);
 
-         return view('student.pages.project_or_thesis_details',compact('Project_or_Thesis', 'Assigned_Student', 'Students_Details'));
+         return view('student.pages.project_or_thesis_details',compact('Project_or_Thesis', 'Assigned_Student', 'Assigned_Students_Info'));
     }
 
 

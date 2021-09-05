@@ -143,6 +143,51 @@
                     Choices.js is a fantastic library for custom selects with tons of options. Check out their <a href="https://joshuajohnson.co.uk/Choices/" target="_blank">documentation</a> for more options and examples.
                   </div>
                 </div>
+
+                <div class="card mb-grid">
+                  <div class="card-header">
+                    <div class="card-header-title">Advanced Select (Choices.js)</div>
+                  </div>
+                  <div class="card-body">
+                    <div class="form-group">
+                      <label class="form-label">Assigned Students</label><br>
+@foreach($Assigned_Students_Info as $key => $value)
+                      <span>{{$value}}</span> <br>
+@endforeach
+                    </div>
+
+                    <!-- <div class="form-group">
+                      <label class="form-label">Category</label><br>
+                      <span>{{$Project_or_Thesis[0]->categoryName}}</span>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label">Reference</label><br>
+                      <span>{{$Project_or_Thesis[0]->reference}}</span>
+                    </div> -->
+
+                    <!-- <div class="form-group">
+                      <label class="form-label">Multiple Select</label>
+                      <select name="select" multiple class="form-control js-choice">
+                        <option value="1">Sample value</option>
+                        <option value="2" selected>Sample value 2</option>
+                        <option value="3">Sample value 3</option>
+                      </select>
+                    </div> -->
+
+                    <!-- <div class="form-group mb-0">
+                      <label class="form-label">Multople Select With remove icon</label>
+                      <select name="select" multiple class="form-control js-choice-remove">
+                        <option value="1">Sample value</option>
+                        <option value="2" selected>Sample value 2</option>
+                        <option value="3">Sample value 3</option>
+                      </select>
+                    </div> -->
+                  </div>
+                  <div class="card-footer">
+                    Choices.js is a fantastic library for custom selects with tons of options. Check out their <a href="https://joshuajohnson.co.uk/Choices/" target="_blank">documentation</a> for more options and examples.
+                  </div>
+                </div>
               </div>
 
               <div class="col-lg-6">
