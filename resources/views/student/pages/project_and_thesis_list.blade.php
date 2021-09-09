@@ -102,7 +102,7 @@
                           </td>
                           @endif
                           <td>
-                            <a type="button" class="btn btn-success" href="{{URL::to('/view_project_or_thesis_info/'.$obj->id)}}">View</a>
+                            <a type="button" class="btn btn-success" href="{{URL::to('/project_or_thesis_details/'.$obj->id)}}">View</a>
                             <a type="button" class="btn btn-primary" href="{{URL::to('/edit_project_or_thesis_info/'.$obj->id)}}">Edit</a>
                           <a type="button" class="btn btn-danger" href="{{URL::to('delete_project_or_thesis_info/'.$obj->id)}}" onclick="return confirm('Are you sure to delete?')" >Delete</a>
                           </td>

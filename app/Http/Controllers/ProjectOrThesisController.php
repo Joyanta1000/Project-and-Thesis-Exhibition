@@ -12,6 +12,7 @@ use App\Models\Project_or_Thesis;
 use App\Models\File;
 use App\Models\Students;
 use App\Models\Assigned_Student;
+use App\Models\Assigned_Supervisor;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use \Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
@@ -173,6 +174,13 @@ class ProjectOrThesisController extends Controller
              ->where('assigned__students.project_id', '=', $Project_or_Thesis[0]->id)
              ->get();
 
+             $Assigned_Supervisor = DB::table('project_or__theses')
+             ->join('assigned__supervisors', 'project_or__theses.id', '=', 'assigned__supervisors.project_id')
+            // //->join('assigned__supervisors', 'project_or__theses.id', '=', 'assigned__supervisors.project_id')
+             ->select('assigned__supervisors.supervisor_id')
+             ->where('assigned__supervisors.project_id', '=', $Project_or_Thesis[0]->id)
+             ->get();
+
              //dd($Assigned_Student);
 
             //  $myArr = [];
@@ -195,6 +203,43 @@ class ProjectOrThesisController extends Controller
     //print_r($Students_Details[0]->name);
     
 }
+
+
+$Assigned_Supervisors_Info = array();
+
+             foreach($Assigned_Supervisor as $key => $value)
+{
+	//dd($value->student_id);
+    $Supervisors_Details = DB::table('supervisors')
+             ->join('assigned__supervisors', 'supervisors.supervisor_id', '=', 'assigned__supervisors.supervisor_id')
+             // //->join('assigned__supervisors', 'project_or__theses.id', '=', 'assigned__supervisors.project_id')
+              ->select('supervisors.name')
+              ->where('supervisors.supervisor_id', '=', $value->supervisor_id)
+              ->get();
+            //   dd(Students_Details);
+                
+      array_push($Assigned_Supervisors_Info, $Supervisors_Details[0]->name);
+    //print_r($Students_Details[0]->name);
+    
+}
+
+
+$To_Assign_Student = DB::table('students')
+             //->join('assigned__students', 'students.student_id', '=', 'assigned__students.student_id')
+             // //->join('assigned__supervisors', 'project_or__theses.id', '=', 'assigned__supervisors.project_id')
+              ->select('*')
+              //->where('students.student_id', '=', $value->student_id)
+              ->get();
+
+
+              $To_Assign_Supervisor = DB::table('supervisors')
+             //->join('assigned__students', 'students.student_id', '=', 'assigned__students.student_id')
+             // //->join('assigned__supervisors', 'project_or__theses.id', '=', 'assigned__supervisors.project_id')
+              ->select('*')
+              //->where('students.student_id', '=', $value->student_id)
+              ->get();
+              //dd($To_Assign_Student);
+
 //die();
 
 //     var_dump($Assigned_Students_Info);
@@ -213,10 +258,74 @@ class ProjectOrThesisController extends Controller
              
 //dd($Students_Details);
 
-         return view('student.pages.project_or_thesis_details',compact('Project_or_Thesis', 'Assigned_Student', 'Assigned_Students_Info'));
+         return view('student.pages.project_or_thesis_details',compact('Project_or_Thesis', 'Assigned_Student', 'Assigned_Students_Info', 'To_Assign_Student', 'To_Assign_Supervisor', 'Assigned_Supervisors_Info'));
     }
 
+    public function assign_student(Request $request)
+    {
+        $rules = [
+            //'name' => 'required',
+            'project_id' => 'required',
+            'student_id' => 'required|unique:assigned__students,student_id',
+            // 'email' => 'required|string|email|max:255'
+        ];
+        $validator = Validator::make($request->all(),$rules);
+        if ($validator->fails()) {
+            return redirect()
+            ->back()
+            ->withInput()
+            ->withErrors($validator);
+        }
+        else{
+            $data = $request->input();
+            try{
 
+                $Assigned_Student = new Assigned_Student;
+                $Assigned_Student->project_id = $request->project_id;
+                $Assigned_Student->student_id = $request->student_id;
+                $Assigned_Student->is_active = 1;
+                $Assigned_Student->save();
+
+                return redirect()->back()->with('status',"Student Assigned Successfully");
+            }
+            catch(Exception $e){
+                return redirect()->back()->with('failed',"operation failed");
+            }
+        }
+    }
+
+    public function assign_supervisor(Request $request)
+    {
+        $rules = [
+            //'name' => 'required',
+            'project_id' => 'required',
+            'supervisor_id' => 'required|unique:assigned__supervisors,supervisor_id',
+            // 'email' => 'required|string|email|max:255'
+        ];
+        $validator = Validator::make($request->all(),$rules);
+        if ($validator->fails()) {
+            return redirect()
+            ->back()
+            ->withInput()
+            ->withErrors($validator);
+        }
+        else{
+            $data = $request->input();
+            try{
+
+                $Assigned_Supervisor = new Assigned_Supervisor;
+                $Assigned_Supervisor->project_id = $request->project_id;
+                $Assigned_Supervisor->supervisor_id = $request->supervisor_id;
+                $Assigned_Supervisor->is_active = 1;
+                $Assigned_Supervisor->save();
+
+                return redirect()->back()->with('status',"Supervisor Assigned Successfully");
+            }
+            catch(Exception $e){
+                return redirect()->back()->with('failed',"operation failed");
+            }
+        }
+    }
 
     /**
      * Display the specified resource.

@@ -61,8 +61,8 @@
 @endif
 
 
-<form action="/insert_project_or_thesis" method="post" enctype="multipart/form-data">
-@csrf
+<!-- <form action="/insert_project_or_thesis" method="post" enctype="multipart/form-data">
+@csrf -->
             <div class="row">
               <div class="col-lg-6">
                 <div class="card mb-grid">
@@ -156,6 +156,126 @@
 @endforeach
                     </div>
 
+                    <div class="form-group">
+
+                    @if (session('status'))
+<br>
+<div class="alert alert-success" role="alert">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  {{ session('status') }}
+</div>
+@elseif(session('failed'))
+<br>
+<div class="alert alert-danger" role="alert">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  {{ session('failed') }}
+</div>
+@endif
+
+@if (count($errors) > 0)
+<br>
+         <div class = "alert alert-danger">
+            <ul>
+               @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+               @endforeach
+            </ul>
+         </div>
+@endif
+
+                      <form action="/assign_student" method="post">
+                      @csrf
+                      <input type="hidden" name="project_id" value="{{$Project_or_Thesis[0]->id}}">
+                      <label class="form-label">Assign Student</label>
+                      <select name="student_id" class="form-control js-choice">
+                      <option value="">Select</option>
+                      @foreach($To_Assign_Student as $key => $value)
+                      <option value="{{$value->student_id}}">{{$value->name}}</option>
+                      @endforeach
+                      </select>
+                      <br>
+                      <button type="submit" value="submit" class="btn btn-primary">Assign</button>
+                    </form>
+                    </div>
+<hr>
+                    <div class="form-group">
+                      <label class="form-label">Assigned Supervisor</label><br>
+@foreach($Assigned_Supervisors_Info as $key => $value)
+                      <span>{{$value}}</span> <br>
+@endforeach
+                    </div>
+
+                    <div class="form-group">
+
+                    @if (session('status'))
+<br>
+<div class="alert alert-success" role="alert">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  {{ session('status') }}
+</div>
+@elseif(session('failed'))
+<br>
+<div class="alert alert-danger" role="alert">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  {{ session('failed') }}
+</div>
+@endif
+
+@if (count($errors) > 0)
+<br>
+         <div class = "alert alert-danger">
+            <ul>
+               @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+               @endforeach
+            </ul>
+         </div>
+@endif
+
+                      <form action="/assign_supervisor" method="post">
+                      @csrf
+                      <input type="hidden" name="project_id" value="{{$Project_or_Thesis[0]->id}}">
+                      <label class="form-label">Assign Supervisor</label>
+                      <select name="supervisor_id" class="form-control js-choice">
+                      <option value="">Select</option>
+                      @foreach($To_Assign_Supervisor as $key => $value)
+                      <option value="{{$value->supervisor_id}}">{{$value->name}}</option>
+                      @endforeach
+                      </select>
+                      <br>
+                      <button type="submit" value="submit" class="btn btn-primary">Assign</button>
+                    </form>
+                    </div>
+
+                    <!-- <div class="form-group">
+                      <label class="form-label">Category</label><br>
+                      <span>{{$Project_or_Thesis[0]->categoryName}}</span>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label">Reference</label><br>
+                      <span>{{$Project_or_Thesis[0]->reference}}</span>
+                    </div> -->
+
+                    <!-- <div class="form-group">
+                      <label class="form-label">Multiple Select</label>
+                      <select name="select" multiple class="form-control js-choice">
+                        <option value="1">Sample value</option>
+                        <option value="2" selected>Sample value 2</option>
+                        <option value="3">Sample value 3</option>
+                      </select>
+                    </div> -->
+
+                    <!-- <div class="form-group mb-0">
+                      <label class="form-label">Multople Select With remove icon</label>
+                      <select name="select" multiple class="form-control js-choice-remove">
+                        <option value="1">Sample value</option>
+                        <option value="2" selected>Sample value 2</option>
+                        <option value="3">Sample value 3</option>
+                      </select>
+                    </div> -->
+                  
+
                     <!-- <div class="form-group">
                       <label class="form-label">Category</label><br>
                       <span>{{$Project_or_Thesis[0]->categoryName}}</span>
@@ -184,11 +304,28 @@
                       </select>
                     </div> -->
                   </div>
+
+                  
+
                   <div class="card-footer">
                     Choices.js is a fantastic library for custom selects with tons of options. Check out their <a href="https://joshuajohnson.co.uk/Choices/" target="_blank">documentation</a> for more options and examples.
                   </div>
+
+
+                  
+
+
                 </div>
               </div>
+
+               <!-- <div class="card mb-grid">
+                  <div class="card-header">
+                    <div class="card-header-title">Advanced Select (Choices.js)</div>
+                  </div>
+                  <div class="card-body">
+                   
+                </div>
+              </div> -->
 
               <div class="col-lg-6">
                 <div class="card mb-grid">
@@ -196,6 +333,13 @@
                     <div class="card-header-title">Date Picker</div>
                   </div>
                   <div class="card-body">
+
+
+<!-- Assign Supervisor -->
+
+
+
+<!-- Assign Supervisor -->
                     <!-- <div class="form-group">
                       <label class="form-label">Date Picker Default</label>
                       <input class="form-control mb-2 date-default" type="text" placeholder="Pick date">
@@ -227,20 +371,194 @@
                       <iframe src="{{$Project_or_Thesis[0]->file_url}}" width="100%" height="500px">
                     </div>
 
+                    
+
                   </div>
                   <div class="card-footer">
                     <a href="https://chmln.github.io/flatpickr/" target="_blank">Flatpickr</a> is a light-weight library for picking dates and times. It is feature rich and supports date ranges, disabling dates, multiple dates and many more.
                   </div>
+
+
+                  <div class="form-group">
+                      <label class="form-label">Assigned Supervisor</label><br>
+@foreach($Assigned_Supervisors_Info as $key => $value)
+                      <span>{{$value}}</span> <br>
+@endforeach
+                    </div>
+
+                    <div class="form-group">
+
+                    @if (session('status'))
+<br>
+<div class="alert alert-success" role="alert">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  {{ session('status') }}
+</div>
+@elseif(session('failed'))
+<br>
+<div class="alert alert-danger" role="alert">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  {{ session('failed') }}
+</div>
+@endif
+
+@if (count($errors) > 0)
+<br>
+         <div class = "alert alert-danger">
+            <ul>
+               @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+               @endforeach
+            </ul>
+         </div>
+@endif
+
+                      <form action="/assign_supervisor" method="post">
+                      @csrf
+                      <input type="hidden" name="project_id" value="{{$Project_or_Thesis[0]->id}}">
+                      <label class="form-label">Assign Supervisor</label>
+                      <select name="supervisor_id" class="form-control js-choice">
+                      <option value="">Select</option>
+                      @foreach($To_Assign_Supervisor as $key => $value)
+                      <option value="{{$value->supervisor_id}}">{{$value->name}}</option>
+                      @endforeach
+                      </select>
+                      <br>
+                      <button type="submit" value="submit" class="btn btn-primary">Assign</button>
+                    </form>
+                    </div>
+
+                    <!-- <div class="form-group">
+                      <label class="form-label">Category</label><br>
+                      <span>{{$Project_or_Thesis[0]->categoryName}}</span>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label">Reference</label><br>
+                      <span>{{$Project_or_Thesis[0]->reference}}</span>
+                    </div> -->
+
+                    <!-- <div class="form-group">
+                      <label class="form-label">Multiple Select</label>
+                      <select name="select" multiple class="form-control js-choice">
+                        <option value="1">Sample value</option>
+                        <option value="2" selected>Sample value 2</option>
+                        <option value="3">Sample value 3</option>
+                      </select>
+                    </div> -->
+
+                    <!-- <div class="form-group mb-0">
+                      <label class="form-label">Multople Select With remove icon</label>
+                      <select name="select" multiple class="form-control js-choice-remove">
+                        <option value="1">Sample value</option>
+                        <option value="2" selected>Sample value 2</option>
+                        <option value="3">Sample value 3</option>
+                      </select>
+                    </div> -->
+                  </div>
+                  <div class="card-footer">
+                    Choices.js is a fantastic library for custom selects with tons of options. Check out their <a href="https://joshuajohnson.co.uk/Choices/" target="_blank">documentation</a> for more options and examples.
+                  </div>
+
+
                 </div>
               </div>
 
-              <div class="col-lg-6">
+              
+              <div class="row">
+              <div class="col-5">
                 <div class="card mb-grid">
-                <button type="submit" name="submit" class="btn btn-pill btn-outline-light">Add Items</button>
+                  <div class="card-header">
+                    <div class="card-header-title">Date Picker</div>
+                  </div>
+                  
+
+                  <div class="form-group">
+                      <label class="form-label">Assigned Supervisor</label><br>
+@foreach($Assigned_Supervisors_Info as $key => $value)
+                      <span>{{$value}}</span> <br>
+@endforeach
+                    </div>
+
+                    <div class="form-group">
+
+                    @if (session('status'))
+<br>
+<div class="alert alert-success" role="alert">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  {{ session('status') }}
+</div>
+@elseif(session('failed'))
+<br>
+<div class="alert alert-danger" role="alert">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  {{ session('failed') }}
+</div>
+@endif
+
+@if (count($errors) > 0)
+<br>
+         <div class = "alert alert-danger">
+            <ul>
+               @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+               @endforeach
+            </ul>
+         </div>
+@endif
+
+                      <form action="/assign_supervisor" method="post">
+                      @csrf
+                      <input type="hidden" name="project_id" value="{{$Project_or_Thesis[0]->id}}">
+                      <label class="form-label">Assign Supervisor</label>
+                      <select name="supervisor_id" class="form-control js-choice">
+                      <option value="">Select</option>
+                      @foreach($To_Assign_Supervisor as $key => $value)
+                      <option value="{{$value->supervisor_id}}">{{$value->name}}</option>
+                      @endforeach
+                      </select>
+                      <br>
+                      <button type="submit" value="submit" class="btn btn-primary">Assign</button>
+                    </form>
+                    </div>
+
+                    <!-- <div class="form-group">
+                      <label class="form-label">Category</label><br>
+                      <span>{{$Project_or_Thesis[0]->categoryName}}</span>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label">Reference</label><br>
+                      <span>{{$Project_or_Thesis[0]->reference}}</span>
+                    </div> -->
+
+                    <!-- <div class="form-group">
+                      <label class="form-label">Multiple Select</label>
+                      <select name="select" multiple class="form-control js-choice">
+                        <option value="1">Sample value</option>
+                        <option value="2" selected>Sample value 2</option>
+                        <option value="3">Sample value 3</option>
+                      </select>
+                    </div> -->
+
+                    <!-- <div class="form-group mb-0">
+                      <label class="form-label">Multople Select With remove icon</label>
+                      <select name="select" multiple class="form-control js-choice-remove">
+                        <option value="1">Sample value</option>
+                        <option value="2" selected>Sample value 2</option>
+                        <option value="3">Sample value 3</option>
+                      </select>
+                    </div> -->
+                  </div>
+                  <div class="card-footer">
+                    Choices.js is a fantastic library for custom selects with tons of options. Check out their <a href="https://joshuajohnson.co.uk/Choices/" target="_blank">documentation</a> for more options and examples.
+                  </div>
+                    </div>
+
                 </div>
               </div>
             </div>
-</form>
+<!-- </form> -->
           </div>
         </div>
       </div>

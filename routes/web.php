@@ -193,7 +193,11 @@ Route::post('/insert_project_or_thesis',[ProjectOrThesisController::class, 'inse
 
 Route::get('/project_and_thesis_list',[ProjectOrThesisController::class, 'project_or_thesis_show']);
 
-Route::get('/view_project_or_thesis_info/{id}',[ProjectOrThesisController::class, 'view_project_or_thesis_info']);
+Route::get('/project_or_thesis_details/{id}',[ProjectOrThesisController::class, 'view_project_or_thesis_info']);
+
+Route::post('/assign_student',[ProjectOrThesisController::class, 'assign_student']);
+
+Route::post('/assign_supervisor',[ProjectOrThesisController::class, 'assign_supervisor']);
 
 });
 
