@@ -34,7 +34,7 @@
                 <i data-feather="pie-chart"></i>
               </span>
               <span class="sidebar-nav-name">
-                Charts
+                Project or Thesis
               </span>
               <span class="sidebar-nav-end">
                 <i data-feather="chevron-right" class="nav-collapse-icon"></i>
@@ -43,23 +43,23 @@
 
             <ul class="sidebar-sub-nav collapse" id="example">
               <li class="sidebar-nav-item">
-                <a href="./charts_chartjs.html" class="sidebar-nav-link">
+                <a href="/add_project_or_thesis" class="sidebar-nav-link">
                   <span class="sidebar-nav-abbr">
-                    Ch
+                    Apt
                   </span>
                   <span class="sidebar-nav-name">
-                    ChartJS
+                    Add Project Or Thesis
                   </span>
                 </a>
               </li>
 
               <li class="sidebar-nav-item">
-                <a href="./charts_morris.html" class="sidebar-nav-link">
+                <a href="/project_and_thesis_list" class="sidebar-nav-link">
                   <span class="sidebar-nav-abbr">
-                    Mo
+                    Pt
                   </span>
                   <span class="sidebar-nav-name">
-                    Morris
+                    Project Or Thesis List
                   </span>
                 </a>
               </li>

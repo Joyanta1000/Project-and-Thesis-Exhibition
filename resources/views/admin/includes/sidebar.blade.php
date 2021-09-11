@@ -1,7 +1,7 @@
 <div class="adminx-sidebar expand-hover push" id="sidebar">
         <ul class="sidebar-nav">
           <li class="sidebar-nav-item">
-            <a href="../index.html" class="sidebar-nav-link">
+            <a href="/admin" class="sidebar-nav-link">
               <span class="sidebar-nav-icon">
                 <i data-feather="home"></i>
               </span>
@@ -34,7 +34,7 @@
                 <i data-feather="pie-chart"></i>
               </span>
               <span class="sidebar-nav-name">
-                Charts
+                Category
               </span>
               <span class="sidebar-nav-end">
                 <i data-feather="chevron-right" class="nav-collapse-icon"></i>
@@ -43,23 +43,23 @@
 
             <ul class="sidebar-sub-nav collapse" id="example">
               <li class="sidebar-nav-item">
-                <a href="./charts_chartjs.html" class="sidebar-nav-link">
+                <a href="/categories" class="sidebar-nav-link">
                   <span class="sidebar-nav-abbr">
-                    Ch
+                    Ca
                   </span>
                   <span class="sidebar-nav-name">
-                    ChartJS
+                    Categories
                   </span>
                 </a>
               </li>
 
               <li class="sidebar-nav-item">
-                <a href="./charts_morris.html" class="sidebar-nav-link">
+                <a href="/add_category" class="sidebar-nav-link">
                   <span class="sidebar-nav-abbr">
-                    Mo
+                    Ac
                   </span>
                   <span class="sidebar-nav-name">
-                    Morris
+                    Add Category
                   </span>
                 </a>
               </li>
@@ -72,7 +72,7 @@
                 <i data-feather="align-justify"></i>
               </span>
               <span class="sidebar-nav-name">
-                Tables
+                Type
               </span>
               <span class="sidebar-nav-end">
                 <i data-feather="chevron-right" class="nav-collapse-icon"></i>
@@ -81,29 +81,31 @@
 
             <ul class="sidebar-sub-nav collapse" id="navTables">
               <li class="sidebar-nav-item">
-                <a href="./tables.html" class="sidebar-nav-link">
+                <a href="/add_types" class="sidebar-nav-link">
                   <span class="sidebar-nav-abbr">
-                    Re
+                    At
                   </span>
                   <span class="sidebar-nav-name">
-                    Regular Tables
+                    Add Type
                   </span>
                 </a>
               </li>
 
               <li class="sidebar-nav-item">
-                <a href="./tables_data.html" class="sidebar-nav-link">
+                <a href="./types" class="sidebar-nav-link">
                   <span class="sidebar-nav-abbr">
-                    Da
+                    T
                   </span>
                   <span class="sidebar-nav-name">
-                    Data Tables
+                    Types
                   </span>
                 </a>
               </li>
             </ul>
           </li>
 
+
+          
           <li class="sidebar-nav-item">
             <a class="sidebar-nav-link" data-toggle="collapse" href="#navForms" aria-expanded="false" aria-controls="navForms">
               <span class="sidebar-nav-icon">
@@ -148,7 +150,7 @@
                 <i data-feather="grid"></i>
               </span>
               <span class="sidebar-nav-name">
-                UI Elements
+                University
               </span>
               <span class="sidebar-nav-end">
                 <i data-feather="chevron-right" class="nav-collapse-icon"></i>
@@ -157,28 +159,28 @@
 
             <ul class="sidebar-sub-nav collapse" id="navUI">
               <li class="sidebar-nav-item">
-                <a href="./icons.html" class="sidebar-nav-link">
+                <a href="/add_university" class="sidebar-nav-link">
                   <span class="sidebar-nav-abbr">
-                    Ic
+                    Au
                   </span>
                   <span class="sidebar-nav-name">
-                    Icons
+                    Add University
                   </span>
                 </a>
               </li>
 
               <li class="sidebar-nav-item">
-                <a href="./buttons.html" class="sidebar-nav-link">
+                <a href="/universities" class="sidebar-nav-link">
                   <span class="sidebar-nav-abbr">
-                    Bu
+                    U
                   </span>
                   <span class="sidebar-nav-name">
-                    Buttons
+                    Universities
                   </span>
                 </a>
               </li>
 
-              <li class="sidebar-nav-item">
+              <!-- <li class="sidebar-nav-item">
                 <a href="./notifications.html" class="sidebar-nav-link">
                   <span class="sidebar-nav-abbr">
                     No
@@ -187,9 +189,9 @@
                     Notifications
                   </span>
                 </a>
-              </li>
+              </li> -->
 
-              <li class="sidebar-nav-item">
+              <!-- <li class="sidebar-nav-item">
                 <a href="./progress.html" class="sidebar-nav-link">
                   <span class="sidebar-nav-abbr">
                     Pr
@@ -198,9 +200,9 @@
                     Progress Bars
                   </span>
                 </a>
-              </li>
+              </li> -->
 
-              <li class="sidebar-nav-item">
+              <!-- <li class="sidebar-nav-item">
                 <a href="./tabs.html" class="sidebar-nav-link">
                   <span class="sidebar-nav-abbr">
                     Ta
@@ -209,7 +211,7 @@
                     Tabs
                   </span>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </li>
 
@@ -219,7 +221,7 @@
                 <i data-feather="layers"></i>
               </span>
               <span class="sidebar-nav-name">
-                Other Layouts
+                Others
               </span>
               <span class="sidebar-nav-end">
                 <i data-feather="chevron-right" class="nav-collapse-icon"></i>
@@ -228,70 +230,93 @@
 
             <ul class="sidebar-sub-nav collapse" id="navExtra">
               <li class="sidebar-nav-item">
-                <a href="./login.html" class="sidebar-nav-link">
+                <a href="add_designation" class="sidebar-nav-link">
                   <span class="sidebar-nav-abbr">
-                    Lo
+                    Ad
                   </span>
                   <span class="sidebar-nav-name">
-                    Login
+                    Add Designation
                   </span>
                 </a>
               </li>
 
               <li class="sidebar-nav-item">
-                <a href="./signup.html" class="sidebar-nav-link">
+                <a href="/designations" class="sidebar-nav-link">
                   <span class="sidebar-nav-abbr">
-                    Si
+                    De
                   </span>
                   <span class="sidebar-nav-name">
-                    Sign Up
+                    Designations
                   </span>
                 </a>
               </li>
 
               <li class="sidebar-nav-item">
-                <a href="./404.html" class="sidebar-nav-link">
+                <a href="/add_department" class="sidebar-nav-link">
                   <span class="sidebar-nav-abbr">
-                    Nf
+                    Ad
                   </span>
                   <span class="sidebar-nav-name">
-                    404 Error
+                    Add Department
                   </span>
                 </a>
               </li>
 
               <li class="sidebar-nav-item">
-                <a href="./500.html" class="sidebar-nav-link">
+                <a href="/departments" class="sidebar-nav-link">
                   <span class="sidebar-nav-abbr">
-                    Is
+                    De
                   </span>
                   <span class="sidebar-nav-name">
-                    500 Error
+                    Departments
                   </span>
                 </a>
               </li>
 
               <li class="sidebar-nav-item">
-                <a href="./timeline.html" class="sidebar-nav-link">
+                <a href="/add_role" class="sidebar-nav-link">
                   <span class="sidebar-nav-abbr">
-                    Ti
+                    Ar
                   </span>
                   <span class="sidebar-nav-name">
-                    Timeline
+                    Add Role
                   </span>
                 </a>
               </li>
 
               <li class="sidebar-nav-item">
-                <a href="./invoice.html" class="sidebar-nav-link">
+                <a href="/roles" class="sidebar-nav-link">
                   <span class="sidebar-nav-abbr">
-                    In
+                    Ro
                   </span>
                   <span class="sidebar-nav-name">
-                    Invoice
+                    Roles
                   </span>
                 </a>
               </li>
+
+              <li class="sidebar-nav-item">
+                <a href="/add_achievement" class="sidebar-nav-link">
+                  <span class="sidebar-nav-abbr">
+                    Aa
+                  </span>
+                  <span class="sidebar-nav-name">
+                    Add Achievement
+                  </span>
+                </a>
+              </li>
+
+              <li class="sidebar-nav-item">
+                <a href="/achievements" class="sidebar-nav-link">
+                  <span class="sidebar-nav-abbr">
+                    Ac
+                  </span>
+                  <span class="sidebar-nav-name">
+                    Achievements
+                  </span>
+                </a>
+              </li>
+
             </ul>
           </li>
         </ul>

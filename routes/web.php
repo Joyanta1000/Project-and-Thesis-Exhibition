@@ -199,6 +199,10 @@ Route::post('/assign_student',[ProjectOrThesisController::class, 'assign_student
 
 Route::post('/assign_supervisor',[ProjectOrThesisController::class, 'assign_supervisor']);
 
+Route::get('/publish_by_student/{id}',[ProjectOrThesisController::class, 'publish_by_student']);
+
+Route::get('/unpublish_by_student/{id}',[ProjectOrThesisController::class, 'unpublish_by_student']);
+
 });
 
 Route::middleware(['isSupervisor'])->group(function () {
@@ -206,6 +210,18 @@ Route::middleware(['isSupervisor'])->group(function () {
 Route::get('/supervisor_dashboard', function () {
     return view('supervisor.pages.index');
 });
+
+Route::get('/project_and_thesis_list_for_supervisor',[ProjectOrThesisController::class, 'project_or_thesis_show_for_supervisor']);
+
+Route::get('/project_or_thesis_details_for_supervisor/{id}',[ProjectOrThesisController::class, 'view_project_or_thesis_info_for_supervisor']);
+
+// Route::post('/assign_student',[ProjectOrThesisController::class, 'assign_student']);
+
+// Route::post('/assign_supervisor',[ProjectOrThesisController::class, 'assign_supervisor']);
+
+// Route::get('/publish_by_student/{id}',[ProjectOrThesisController::class, 'publish_by_student']);
+
+// Route::get('/unpublish_by_student/{id}',[ProjectOrThesisController::class, 'unpublish_by_student']);
 
 });
 

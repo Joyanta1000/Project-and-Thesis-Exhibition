@@ -11,11 +11,11 @@
   <body>
     <div class="adminx-container">
       <!-- Header -->
-      @include('student.includes.navbar')
+      @include('sepervisor.includes.navbar')
       <!-- // Header -->
 
       <!-- expand-hover push -->
-      @include('student.includes.sidebar')
+      @include('supervisor.includes.sidebar')
 
       <!-- Main Content -->
       <div class="adminx-content">

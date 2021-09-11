@@ -205,7 +205,7 @@
 
               <div class="col-lg-6">
                 <div class="card mb-grid">
-                <button type="submit" name="submit" class="btn btn-pill btn-outline-light">Add Items</button>
+                <button type="submit" name="submit" class="btn btn-primary">Add Items</button>
                 </div>
               </div>
             </div>
