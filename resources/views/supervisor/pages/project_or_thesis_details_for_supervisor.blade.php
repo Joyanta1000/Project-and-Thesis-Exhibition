@@ -11,7 +11,7 @@
   <body>
     <div class="adminx-container">
       <!-- Header -->
-      @include('sepervisor.includes.navbar')
+      @include('supervisor.includes.navbar')
       <!-- // Header -->
 
       <!-- expand-hover push -->
@@ -363,13 +363,13 @@
                     </div> -->
                     @if($Project_or_Thesis[0]->is_active == 0)
                     <div class="card mb-grid">
-                <a type="submit" href= "/publish_by_student/{{$Project_or_Thesis[0]->id}}" name="submit" class="btn btn-primary">Publish</a>
+                <a type="submit" href= "/publish_by_supervisor/{{$Project_or_Thesis[0]->id}}" name="submit" class="btn btn-primary">Publish</a>
                 </div>
                 @elseif($Project_or_Thesis[0]->is_active == 1)
                 <div class="alert alert-success" role="alert">
                   Published
                     </div>
-                    <a type="submit" href= "/unpublish_by_student/{{$Project_or_Thesis[0]->id}}" name="submit" class="btn btn-danger">Unpublish</a>
+                    <a type="submit" href= "/unpublish_by_supervisor/{{$Project_or_Thesis[0]->id}}" name="submit" class="btn btn-danger">Unpublish</a>
                 @endif
                 <hr>
                     <div class="form-group">

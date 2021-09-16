@@ -28,6 +28,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Route::get('/exhibition', function () {
+//     return view('exhibition');
+// });
+
+Route::get('/rate', function () {
+    return view('rate');
+});
+
+Route::get('/exhibition',[ProjectOrThesisController::class, 'project_or_thesis_exhibition']);
+
+Route::get('/project_or_thesis_details_for_exhibition/{id}',[ProjectOrThesisController::class, 'project_or_thesis_details_for_exhibition']);
+
 Route::get('/User_Login',[UserController::class, 'login']);
 
 Route::post('/login',[LoginController::class, 'redirectTo']);
@@ -214,6 +226,10 @@ Route::get('/supervisor_dashboard', function () {
 Route::get('/project_and_thesis_list_for_supervisor',[ProjectOrThesisController::class, 'project_or_thesis_show_for_supervisor']);
 
 Route::get('/project_or_thesis_details_for_supervisor/{id}',[ProjectOrThesisController::class, 'view_project_or_thesis_info_for_supervisor']);
+
+Route::get('/publish_by_supervisor/{id}',[ProjectOrThesisController::class, 'publish_by_supervisor']);
+
+Route::get('/unpublish_by_supervisor/{id}',[ProjectOrThesisController::class, 'unpublish_by_supervisor']);
 
 // Route::post('/assign_student',[ProjectOrThesisController::class, 'assign_student']);
 
