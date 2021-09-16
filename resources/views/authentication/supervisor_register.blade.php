@@ -13,13 +13,12 @@
       <div class="page-login">
         <div class="text-center">
           <a class="navbar-brand mb-4 h1" href="login.html">
-            <img src="{{asset('../components/demo/img/logo.png')}}" class="navbar-brand-image d-inline-block align-top mr-2" alt="">
-            AdminX
+            <img style="height: 100px; width: 100px;" src="{{asset('../UniversityImage/regis.svg')}}" class="navbar-brand-image d-inline-block align-top mr-2" alt="">
           </a>
         </div>
 
         <div class="card mb-0">
-          <div class="card-body">
+          <!-- <div class="card-body">
             <a class="btn btn-labeled btn-block text-left btn-sm btn-facebook" href="#">
               <span class="btn-label">
                 <i data-feather="facebook"></i>
@@ -32,10 +31,10 @@
               </span>
               Login with Twitter
             </a>
-          </div>
-          <div class="card-seperator">
+          </div> -->
+          <!-- <div class="card-seperator">
             <span>or</span>
-          </div>
+          </div> -->
 
 <div>
   @if (session('status'))

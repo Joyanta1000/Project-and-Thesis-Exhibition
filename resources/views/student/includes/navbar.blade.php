@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand justify-content-between fixed-top">
         <a class="navbar-brand mb-0 h1 d-none d-md-block" href="index.html">
-          <img src="../demo/img/logo.png" class="navbar-brand-image d-inline-block align-top mr-2" alt="">
-          AdminX
+          <img src="{{asset('../UniversityImage/regis.svg')}}" class="navbar-brand-image d-inline-block align-top mr-2" alt="">
+          Universitas Regisiana
         </a>
 
         <form class="form-inline form-quicksearch d-none d-md-block mx-auto">

@@ -13,13 +13,13 @@
       <div class="page-login">
         <div class="text-center">
           <a class="navbar-brand mb-4 h1" href="login.html">
-            <img src="{{asset('../components/demo/img/logo.png')}}" class="navbar-brand-image d-inline-block align-top mr-2" alt="">
-            AdminX
+            <img style="height: 100px; width: 100px;" src="{{asset('../UniversityImage/regis.svg')}}" class="navbar-brand-image d-inline-block align-top mr-2" alt="">
+            <!-- Universitas Regisiana -->
           </a>
         </div>
 
         <div class="card mb-0">
-          <div class="card-body">
+          <!-- <div class="card-body">
             <a class="btn btn-labeled btn-block text-left btn-sm btn-facebook" href="#">
               <span class="btn-label">
                 <i data-feather="facebook"></i>
@@ -32,10 +32,10 @@
               </span>
               Login with Twitter
             </a>
-          </div>
-          <div class="card-seperator">
+          </div> -->
+          <!-- <div class="card-seperator">
             <span>or</span>
-          </div>
+          </div> -->
 
 <div>
   @if (session('status'))
@@ -77,7 +77,13 @@
                 <label for="exampleDropdownFormPassword1" class="form-label">Password</label>
                 <input type="password" class="form-control" id="exampleDropdownFormPassword1" name="password" placeholder="Password">
               </div>
-              
+
+              <!-- <div class="form-group">
+              <a href="/supervisor_register"><small>Register as a supervisor</small></a>
+              <br>
+              <a href="/student_register"><small>Register as a student</small></a>
+              </div> -->
+
               <div class="form-group">
                 <div class="custom-control custom-checkbox">
                   <input type="checkbox" class="custom-control-input" id="customCheck1">
@@ -88,6 +94,10 @@
             </form>
           </div>
           <div class="card-footer text-center">
+            <!-- <a href="/supervisor_register"><small>Register as a supervisor</small></a>
+            <br>
+            <a href="/student_register"><small>Register as a student</small></a>
+            <br> -->
             <a href="/reset"><small>Forgot your password?</small></a>
           </div>
         </div>
