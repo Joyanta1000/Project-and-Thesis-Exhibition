@@ -13,6 +13,7 @@ use App\Models\File;
 use App\Models\Students;
 use App\Models\Assigned_Student;
 use App\Models\Assigned_Supervisor;
+use App\Models\Review;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use \Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
@@ -33,6 +34,7 @@ class ProjectOrThesisController extends Controller
         $projectId = $id;
         $id = Session::get('id');
 //dd($id);
+$matchThese = ['project_or__theses.id' => $projectId, 'project_or__theses.is_active' => 1];
         $Project_or_Thesis = DB::table('project_or__theses')
             ->join('types', 'project_or__theses.type_id', '=', 'types.id')
             ->join('categories', 'project_or__theses.category_id', '=', 'categories.id')
@@ -40,9 +42,9 @@ class ProjectOrThesisController extends Controller
             ->join('assigned__students', 'project_or__theses.id', '=', 'assigned__students.project_id')
             //->join('assigned__supervisors', 'project_or__theses.id', '=', 'assigned__supervisors.project_id')
             ->select('project_or__theses.*', 'types.name as typeName', 'categories.name as categoryName', 'files.description', 'files.type', 'files.file_url', 'assigned__students.student_id')
-            ->where('project_or__theses.id', '=', $projectId )
+            ->where($matchThese)
             ->get();
-//dd($Project_or_Thesis[0]);
+//dd($Project_or_Thesis[0]->file_url);
              $Assigned_Student = DB::table('project_or__theses')
              ->join('assigned__students', 'project_or__theses.id', '=', 'assigned__students.project_id')
             // //->join('assigned__supervisors', 'project_or__theses.id', '=', 'assigned__supervisors.project_id')
@@ -132,10 +134,60 @@ $To_Assign_Student = DB::table('students')
 //dd($myArr);
 
              
-//dd($Students_Details);
+//dd($projectId);
 
-         return view('project_or_thesis_details_for_exhibition',compact('Project_or_Thesis', 'Assigned_Student', 'Assigned_Students_Info', 'To_Assign_Student', 'To_Assign_Supervisor', 'Assigned_Supervisors_Info'));
+$Review = DB::table('reviews')
+             //->join('assigned__students', 'students.student_id', '=', 'assigned__students.student_id')
+             // //->join('assigned__supervisors', 'project_or__theses.id', '=', 'assigned__supervisors.project_id')
+             ->where('reviews.project_id', '=', $projectId) 
+             ->avg('review');
+              
+              //->get();
+//dd($Review);
+
+              $To_Assign_Supervisor = DB::table('supervisors')
+             //->join('assigned__students', 'students.student_id', '=', 'assigned__students.student_id')
+             // //->join('assigned__supervisors', 'project_or__theses.id', '=', 'assigned__supervisors.project_id')
+              ->select('*')
+              //->where('students.student_id', '=', $value->student_id)
+              ->get();
+
+         return view('project_or_thesis_details_for_exhibition',compact('Project_or_Thesis', 'Assigned_Student', 'Assigned_Students_Info', 'To_Assign_Student', 'To_Assign_Supervisor', 'Assigned_Supervisors_Info', 'Review'));
     }
+    
+    public function review(Request $request){
+        $rules = [
+            
+            // 'email' => 'required|string|email|max:255'
+        ];
+        $validator = Validator::make($request->all(),$rules);
+        if ($validator->fails()) {
+            return redirect()
+            ->back()
+            ->withInput()
+            ->withErrors($validator);
+        }
+        else{
+            $data = $request->input();
+            try{
+                
+                $project_id = $data['project_id'];
+                $rate = $data['rate'];
+
+                $Review_Project_or_Thesis = new Review;
+
+                $Review_Project_or_Thesis->project_id = $project_id;
+                $Review_Project_or_Thesis->review = $rate;
+                
+                $Review_Project_or_Thesis->save();
+                return redirect()->back()->with('status',"Project or Thesis Added Successfully");
+            }
+            catch(Exception $e){
+                return redirect()->back()->with('failed',"operation failed");
+            }
+        }
+    }
+
     // For exhibition
 
     public function index()
@@ -172,7 +224,7 @@ $To_Assign_Student = DB::table('students')
             'category_id' => 'required',
             'reference' => 'required',
             'description' => 'required',
-            'file_url' => 'required|mimes:jpeg,bmp,png,gif,svg,pdf',
+            'file_url' => 'required|mimes:jpeg,bmp,png,gif,svg,pdf,doc,docx',
             // 'email' => 'required|string|email|max:255'
         ];
         $validator = Validator::make($request->all(),$rules);
@@ -208,7 +260,7 @@ $To_Assign_Student = DB::table('students')
                 $File = new File;
                 $File->project_id = $id;
                 $file = $request->file('file_url');
-                $files_name = time() . '.' . $extra_1 . '.' . $file->getClientOriginalExtension();
+                $files_name = time() . $extra_1 . '.' . $file->getClientOriginalExtension();
                 $files_path = public_path('/ProjectOrThesisFiles/');
                 $file->move($files_path,$files_name);
                 $File->file_url ='/ProjectOrThesisFiles/' . $files_name;
@@ -233,14 +285,16 @@ $To_Assign_Student = DB::table('students')
 
         //$id = Session::get('id');
 //print_r($id);
+$matchThese = ['project_or__theses.is_active' => 1];
         $Project_or_Thesis = DB::table('project_or__theses')
             ->join('types', 'project_or__theses.type_id', '=', 'types.id')
             ->join('categories', 'project_or__theses.category_id', '=', 'categories.id')
             ->join('files', 'project_or__theses.id', '=', 'files.project_id')
-            ->join('assigned__students', 'project_or__theses.id', '=', 'assigned__students.project_id')
+            //->join('assigned__students', 'project_or__theses.id', '=', 'assigned__students.project_id')
             //->join('assigned__supervisors', 'project_or__theses.id', '=', 'assigned__supervisors.project_id')
-            ->select('project_or__theses.*', 'types.name as typeName', 'categories.name as categoryName', 'files.description', 'files.type', 'files.file_url', 'assigned__students.student_id')
+            ->select('project_or__theses.*', 'types.name as typeName', 'categories.name as categoryName', 'files.description', 'files.type', 'files.file_url')
             //->where('assigned__students.student_id', '=', $id)
+            ->where($matchThese)
             ->paginate(6);
 //dd($Project_or_Thesis[0]->id);
              //$Assigned_Student = DB::table('project_or__theses')

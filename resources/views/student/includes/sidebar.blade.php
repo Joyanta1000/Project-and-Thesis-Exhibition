@@ -1,7 +1,7 @@
 <div class="adminx-sidebar expand-hover push" id="sidebar">
         <ul class="sidebar-nav">
           <li class="sidebar-nav-item">
-            <a href="../index.html" class="sidebar-nav-link">
+            <a href="/student_dashboard" class="sidebar-nav-link">
               <span class="sidebar-nav-icon">
                 <i data-feather="home"></i>
               </span>
@@ -14,7 +14,7 @@
             </a>
           </li>
 
-          <li class="sidebar-nav-item">
+          <!-- <li class="sidebar-nav-item">
             <a href="#" class="sidebar-nav-link">
               <span class="sidebar-nav-icon">
                 <i data-feather="layout"></i>
@@ -26,7 +26,7 @@
                 <span class="badge badge-info">4</span>
               </span>
             </a>
-          </li>
+          </li> -->
 
           <li class="sidebar-nav-item">
             <a class="sidebar-nav-link collapsed" data-toggle="collapse" href="#example" aria-expanded="false" aria-controls="example">
@@ -66,7 +66,7 @@
             </ul>
           </li>
 
-          <li class="sidebar-nav-item">
+          <!-- <li class="sidebar-nav-item">
             <a class="sidebar-nav-link collapsed" data-toggle="collapse" href="#navTables" aria-expanded="false" aria-controls="navTables">
               <span class="sidebar-nav-icon">
                 <i data-feather="align-justify"></i>
@@ -102,9 +102,9 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
 
-          <li class="sidebar-nav-item">
+          <!-- <li class="sidebar-nav-item">
             <a class="sidebar-nav-link" data-toggle="collapse" href="#navForms" aria-expanded="false" aria-controls="navForms">
               <span class="sidebar-nav-icon">
                 <i data-feather="edit"></i>
@@ -140,7 +140,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
 
           <li class="sidebar-nav-item">
             <a class="sidebar-nav-link collapsed" data-toggle="collapse" href="#navUI" aria-expanded="false" aria-controls="navUI">

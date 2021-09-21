@@ -26,12 +26,12 @@
               <ol class="breadcrumb adminx-page-breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                <li class="breadcrumb-item active  aria-current="page">Regular Tables</li>
+                <li class="breadcrumb-item active  aria-current="page">Project Or Thesis List</li>
               </ol>
             </nav>
 
             <div class="pb-3">
-              <h1>Data Tables</h1>
+              <!-- <h1>Project Or Thesis List</h1> -->
             </div>
 <div>
                   @if (session('status'))
@@ -50,10 +50,10 @@
 </div>
             <div class="row">
               <div class="col">
-                <div class="alert alert-warning" role="alert">
+                <!-- <div class="alert alert-warning" role="alert">
                   <strong>DataTables are a jQuery-only plugin</strong><br />
                   If you know a similar vanilla JS library that you want to see supported, feel free to open an issue on GitHub.
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="row">
@@ -103,7 +103,7 @@
                           @endif
                           <td>
                             <a type="button" class="btn btn-success" href="{{URL::to('/project_or_thesis_details_for_supervisor/'.$obj->id)}}">View</a>
-                            <a type="button" class="btn btn-primary" href="{{URL::to('/edit_project_or_thesis_info/'.$obj->id)}}">Edit</a>
+                            <!-- <a type="button" class="btn btn-primary" href="{{URL::to('/edit_project_or_thesis_info/'.$obj->id)}}">Edit</a> -->
                           <a type="button" class="btn btn-danger" href="{{URL::to('delete_project_or_thesis_info/'.$obj->id)}}" onclick="return confirm('Are you sure to delete?')" >Delete</a>
                           </td>
                         </tr>
@@ -133,6 +133,8 @@
       $(document).ready(function() {
         var table = $('[data-table]').DataTable({
           "columns": [
+            null,
+            null,
             null,
             null,
             null,

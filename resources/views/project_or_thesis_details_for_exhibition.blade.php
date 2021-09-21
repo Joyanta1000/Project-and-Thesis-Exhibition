@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    
-
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <link rel="stylesheet" type="text/css" href="{{asset('../components/dist/css/adminx.css')}}" media="screen" />
     <link rel="stylesheet" type="text/css" href="{{asset('../components/dist/css/adminx.css')}}" media="screen" />
@@ -286,15 +286,18 @@
                         <!-- <div class="rating"  ></div>
                         <input  id="rate3_value"/> -->
 <div>
+
                         <input
                         id="rate3"
     class="rating"
     max="5"
     oninput="this.style.setProperty('--value', `${this.valueAsNumber}`)"
     step="0.1"
-    style="--value:3"
+    style="--value:{{$Review}}"
     type="range"
-    value="3">
+    value="{{$Review}}">
+
+    <input type="hidden" id= "project_id_rate3" value="{{$Project_or_Thesis[0]->id}}">
 
 
                     <!-- </div> -->
@@ -354,12 +357,42 @@
 <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
 
 <script type="text/javascript">
+
+ $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
 var mylist = "";
 function myFunction() {
-  mylist = document.getElementById("rate3").value;
+  rate = document.getElementById("rate3").value;
+
+  project_id = document.getElementById("project_id_rate3").value;
   //var mylist2 = document.getElementById("rate3_value").value;
-  console.log(mylist);
-  alert('Rated Successfully');
+  console.log(rate);
+  console.log(project_id);
+  // alert('Rated Successfully');
+
+  $.ajax({
+           url:'/review',
+           method:'POST',
+           data:{
+                  project_id:project_id, 
+                  rate:rate
+                },
+           success:function(response){
+              if(response){
+                  alert("Rated Successfully") //Message come from controller
+              }else{
+                  alert("Error")
+              }
+           },
+           error:function(error){
+              console.log(error)
+           }
+        });
+
   //document.getElementById("rate3_value").value = mylist.options[mylist.selectedIndex].text;
 }
 
@@ -534,11 +567,13 @@ function myFunction() {
 
                     <div class="form-group">
                       <label class="form-label">Project or Thesis File</label><br>
+                      @if (pathinfo($Project_or_Thesis[0]->file_url, PATHINFO_EXTENSION) == 'pdf')
                       <iframe src="{{$Project_or_Thesis[0]->file_url}}" width="100%" height="500px">
+                      @elseif (pathinfo($Project_or_Thesis[0]->file_url, PATHINFO_EXTENSION) == 'docx' || pathinfo($photo->path, PATHINFO_EXTENSION) == 'doc')
+                      <a href="{{$Project_or_Thesis[0]->file_url}}"><img src="https://img.icons8.com/color/48/000000/microsoft-word-2019--v2.png"/> &nbsp; Download</a>
+                      @endif
                     </div>
-
                     
-
                   </div>
                   <div class="card-footer">
                     <a href="https://chmln.github.io/flatpickr/" target="_blank">Flatpickr</a> is a light-weight library for picking dates and times. It is feature rich and supports date ranges, disabling dates, multiple dates and many more.

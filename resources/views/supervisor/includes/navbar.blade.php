@@ -1,10 +1,13 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <nav class="navbar navbar-expand justify-content-between fixed-top">
-        <a class="navbar-brand mb-0 h1 d-none d-md-block" href="index.html">
+        <a class="navbar-brand mb-0 h1 d-none d-md-block" href="/">
           <img src="{{asset('../UniversityImage/regis.svg')}}" class="navbar-brand-image d-inline-block align-top mr-2" alt="">
         Universitas Regisiana
         </a>
 
-        <form class="form-inline form-quicksearch d-none d-md-block mx-auto">
+        <!-- <form class="form-inline form-quicksearch d-none d-md-block mx-auto">
           <div class="input-group">
             <div class="input-group-prepend">
               <div class="input-group-icon">
@@ -13,7 +16,7 @@
             </div>
             <input type="text" class="form-control" id="search" placeholder="Type to search...">
           </div>
-        </form>
+        </form> -->
 
         <div class="d-flex flex-1 d-block d-md-none">
           <a href="#" class="sidebar-toggle ml-3">
@@ -23,7 +26,7 @@
 
         <ul class="navbar-nav d-flex justify-content-end mr-2">
           <!-- Notificatoins -->
-          <li class="nav-item dropdown d-flex align-items-center mr-2">
+          <!-- <li class="nav-item dropdown d-flex align-items-center mr-2">
             <a class="nav-link nav-link-notifications" id="dropdownNotifications" data-toggle="dropdown" href="#">
               <i class="oi oi-bell display-inline-block align-middle"></i>
               <span class="nav-link-notification-number">3</span>
@@ -68,17 +71,18 @@
                 <a href="#"><small>View all notifications</small></a>
               </div>
             </div>
-          </li>
+          </li> -->
           <!-- Notifications -->
           <li class="nav-item dropdown">
             <a class="nav-link avatar-with-name" id="navbarDropdownMenuLink" data-toggle="dropdown" href="#">
-              <img src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg" class="d-inline-block align-top" alt="">
+              <!-- <span src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg" class="d-inline-block align-top" alt=""> -->
+              <i class="fa fa-gear fa-spin" style="font-size:24px; margin-right: 15px;"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">My Profile</a>
+              <!-- <a class="dropdown-item" href="#">My Profile</a>
               <a class="dropdown-item" href="#">My Tasks</a>
               <a class="dropdown-item" href="#">Settings</a>
-              <div class="dropdown-divider"></div>
+              <div class="dropdown-divider"></div> -->
               <form method="post" action="{{URL::to('logout')}}" id="logout">
                                     {{csrf_field()}}
                                     <a href="#" class="dropdown-item text-danger" onclick="getElementById('logout').submit()">Sign out</a>

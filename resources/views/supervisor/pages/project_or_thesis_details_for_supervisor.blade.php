@@ -5,8 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" type="text/css" href="../components/dist/css/adminx.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="../components/dist/css/adminx.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{{asset('../components/dist/css/adminx.css')}}" media="screen" />
   </head>
   <body>
     <div class="adminx-container">
@@ -17,6 +16,20 @@
       <!-- expand-hover push -->
       @include('supervisor.includes.sidebar')
 
+       <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script src="{{asset('../components/dist/js/vendor.js')}}"></script>
+    <script src="{{asset('../components/dist/js/adminx.js')}}"></script>
+
+    <!-- If you prefer vanilla JS these are the only required scripts -->
+    <!-- script src="../dist/js/vendor.js"></script>
+    <script src="../dist/js/adminx.vanilla.js"></script-->
+
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+
       <!-- Main Content -->
       <div class="adminx-content">
         <div class="adminx-main-content">
@@ -26,12 +39,12 @@
               <ol class="breadcrumb adminx-page-breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item"><a href="#">Forms</a></li>
-                <li class="breadcrumb-item active  aria-current="page">Advanced Elements</li>
+                <li class="breadcrumb-item active  aria-current="page">Project Or Thesis</li>
               </ol>
             </nav>
 
             <div class="pb-3">
-              <h1>Advanced Elements</h1>
+              <!--  -->
             </div>
 
   
@@ -67,7 +80,7 @@
               <div class="col-lg-6">
                 <div class="card mb-grid">
                   <div class="card-header">
-                    <div class="card-header-title">Input Formats</div>
+                    <div class="card-header-title"></div>
                   </div>
                   <div class="card-body">
                     <!-- <div class="form-group">
@@ -98,13 +111,13 @@
                     
                   </div>
                   <div class="card-footer">
-                    Cleave.js is a small library for input formatting. Check out their <a href="http://nosir.github.io/cleave.js/" target="_blank">documentation</a>. <strong>Nice to know:</strong> There are also Angular and ReactJS components available.
+                    <!-- Cleave.js is a small library for input formatting. Check out their <a href="http://nosir.github.io/cleave.js/" target="_blank">documentation</a>. <strong>Nice to know:</strong> There are also Angular and ReactJS components available. -->
                   </div>
                 </div>
 
                 <div class="card mb-grid">
                   <div class="card-header">
-                    <div class="card-header-title">Advanced Select (Choices.js)</div>
+                    <div class="card-header-title"></div>
                   </div>
                   <div class="card-body">
                     <div class="form-group">
@@ -141,13 +154,13 @@
                     </div> -->
                   </div>
                   <div class="card-footer">
-                    Choices.js is a fantastic library for custom selects with tons of options. Check out their <a href="https://joshuajohnson.co.uk/Choices/" target="_blank">documentation</a> for more options and examples.
+                    <!-- Choices.js is a fantastic library for custom selects with tons of options. Check out their <a href="https://joshuajohnson.co.uk/Choices/" target="_blank">documentation</a> for more options and examples. -->
                   </div>
                 </div>
 
                 <div class="card mb-grid">
                   <div class="card-header">
-                    <div class="card-header-title">Advanced Select (Choices.js)</div>
+                    <div class="card-header-title"></div>
                   </div>
                   <div class="card-body">
                     <div class="form-group">
@@ -309,7 +322,7 @@
                   
 
                   <div class="card-footer">
-                    Choices.js is a fantastic library for custom selects with tons of options. Check out their <a href="https://joshuajohnson.co.uk/Choices/" target="_blank">documentation</a> for more options and examples.
+                    <!-- Choices.js is a fantastic library for custom selects with tons of options. Check out their <a href="https://joshuajohnson.co.uk/Choices/" target="_blank">documentation</a> for more options and examples. -->
                   </div>
 
 
@@ -331,7 +344,7 @@
               <div class="col-lg-6">
                 <div class="card mb-grid">
                   <div class="card-header">
-                    <div class="card-header-title">Date Picker</div>
+                    <div class="card-header-title"></div>
                   </div>
                   <div class="card-body">
 
@@ -468,7 +481,7 @@
                     </div> -->
                   </div>
                   <div class="card-footer">
-                    Choices.js is a fantastic library for custom selects with tons of options. Check out their <a href="https://joshuajohnson.co.uk/Choices/" target="_blank">documentation</a> for more options and examples.
+                    <!-- Choices.js is a fantastic library for custom selects with tons of options. Check out their <a href="https://joshuajohnson.co.uk/Choices/" target="_blank">documentation</a> for more options and examples. -->
                   </div>
 
 
@@ -480,7 +493,7 @@
               <div class="col-5">
                 <div class="card mb-grid">
                   <div class="card-header">
-                    <div class="card-header-title">Date Picker</div>
+                    <div class="card-header-title"></div>
                   </div>
                   
 
@@ -562,7 +575,7 @@
                     </div> -->
                   </div>
                   <div class="card-footer">
-                    Choices.js is a fantastic library for custom selects with tons of options. Check out their <a href="https://joshuajohnson.co.uk/Choices/" target="_blank">documentation</a> for more options and examples.
+                    <!-- Choices.js is a fantastic library for custom selects with tons of options. Check out their <a href="https://joshuajohnson.co.uk/Choices/" target="_blank">documentation</a> for more options and examples. -->
                   </div>
                     </div>
 
@@ -590,12 +603,15 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-    <script src="../components/dist/js/vendor.js"></script>
-    <script src="../components/dist/js/adminx.js"></script>
+    <script src="{{asset('../components/dist/js/vendor.js')}}"></script>
+    <script src="{{asset('../components/dist/js/adminx.js')}}"></script>
 
     <!-- If you prefer vanilla JS these are the only required scripts -->
     <!-- script src="../dist/js/vendor.js"></script>
     <script src="../dist/js/adminx.vanilla.js"></script-->
+
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 
     <script>
       var choices = new Choices('.js-choice');

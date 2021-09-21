@@ -32,13 +32,15 @@ Route::get('/', function () {
 //     return view('exhibition');
 // });
 
-Route::get('/rate', function () {
-    return view('rate');
-});
+// Route::get('/rate', function () {
+//     return view('rate');
+// });
 
 Route::get('/exhibition',[ProjectOrThesisController::class, 'project_or_thesis_exhibition']);
 
 Route::get('/project_or_thesis_details_for_exhibition/{id}',[ProjectOrThesisController::class, 'project_or_thesis_details_for_exhibition']);
+
+Route::post('/review',[ProjectOrThesisController::class, 'review']);
 
 Route::get('/User_Login',[UserController::class, 'login']);
 
