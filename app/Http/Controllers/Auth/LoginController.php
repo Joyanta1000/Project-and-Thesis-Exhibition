@@ -55,13 +55,16 @@ public function redirectTo(Request $request){
     $obj = User::where('email','=',$email)
     ->where('password','=',$password)
     ->first();
-
+if($obj){
     $request->session()->put('id',$obj->id);
     $request->session()->put('email',$obj->email);
     $request->session()->put('password',$obj->password);
     $request->session()->put('role_id',$obj->role_id);
     $request->session()->put('is_active',$obj->is_active);
-
+}
+else{
+    return redirect('/User_Login')->with('failed',"Login cradentials are wrong");
+}
     //Session::put('email', $value);
 
     switch ($obj->role_id) {

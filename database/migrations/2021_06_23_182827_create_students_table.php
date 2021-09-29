@@ -15,18 +15,22 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id')->nullable();
-            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('name')->nullable();
             $table->string('phone')->nullable();
             $table->string('slug')->nullable();
             $table->string('batch')->nullable();
             $table->string('session')->nullable();
             $table->string('roll')->nullable();
-            $table->unsignedBigInteger('university_id')->nullable();
+            
+            $table->unsignedBigInteger('university_id');
             $table->foreign('university_id')->references('id')->on('universities')->onDelete('cascade')->onUpdate('cascade');
+            
+            $table->unsignedBigInteger('student_id');
+            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+
             $table->unsignedBigInteger('department_id')->nullable();
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade')->onUpdate('cascade');
+            
             $table->timestamps();
         });
     }

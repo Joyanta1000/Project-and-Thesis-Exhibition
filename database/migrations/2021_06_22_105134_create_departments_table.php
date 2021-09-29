@@ -31,3 +31,5 @@ class CreateDepartmentsTable extends Migration
         Schema::dropIfExists('departments');
     }
 }
+
+// 2021_06_24_105134_create_departments_table
